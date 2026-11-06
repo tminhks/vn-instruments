@@ -48,6 +48,15 @@
   .btn[aria-pressed="true"] { background: var(--accent); color: #1d1a12; }
   .status { min-height: 1.5em; color: var(--accent); }
   footer { margin-top: 28px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .qr { display: none; }
+  @media (min-width: 768px) and (hover: hover) {
+    body { max-width: 760px; margin: 0 auto; }
+    .qr { display: flex; gap: 20px; align-items: center; background: var(--panel); border-radius: 14px; padding: 16px; margin: 8px 0 16px; }
+    .qr img { width: 160px; height: 160px; background: #fff; padding: 8px; border-radius: 8px; flex: none; }
+    .qr h2 { font-size: 20px; margin: 0 0 6px; }
+    .qr p { margin: 0 0 6px; }
+    .qr a { color: var(--text); word-break: break-all; }
+  }
   @media (prefers-reduced-motion: reduce) { .tranh .str::before, .bau-string::before { transition: none; } }
 </style>
 </head>
@@ -57,6 +66,15 @@
   <button type="button" class="lang" id="lang" aria-label="Tiếng Việt">VI</button>
 </header>
 <p data-en="Play Vietnamese instruments with your fingers. Turn the sound on." data-vi="Chơi nhạc cụ Việt Nam bằng ngón tay. Nhớ bật âm thanh.">Play Vietnamese instruments with your fingers. Turn the sound on.</p>
+
+<aside class="qr" aria-labelledby="qr-title">
+  <img src="qr-phone-version.png" alt="QR code that opens this page on a phone">
+  <div>
+    <h2 id="qr-title" data-en="Play on your phone" data-vi="Chơi trên điện thoại">Play on your phone</h2>
+    <p data-en="Scan with the phone camera to play with your fingers and tilt the phone to bend the đàn bầu. On this computer you can still play with the mouse or keyboard." data-vi="Quét bằng camera điện thoại để chơi bằng ngón tay và nghiêng máy để uốn tiếng đàn bầu. Trên máy tính này vẫn chơi được bằng chuột hoặc bàn phím.">Scan with the phone camera to play with your fingers and tilt the phone to bend the đàn bầu. On this computer you can still play with the mouse or keyboard.</p>
+    <p><a href="https://tminhks.github.io/vn-instruments/">tminhks.github.io/vn-instruments</a></p>
+  </div>
+</aside>
 
 <div class="tabs" role="tablist">
   <button type="button" role="tab" id="tab-tranh" aria-controls="panel-tranh" aria-selected="true">Đàn tranh</button>
