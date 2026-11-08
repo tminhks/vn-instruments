@@ -154,3 +154,11 @@
 .breath-bar { display: inline-block; width: 7rem; height: 10px; border: 1px solid var(--edge); background: var(--card); }
 .breath-bar > span { display: block; height: 100%; width: 0; background: var(--vermilion); }
 .fl-note { min-width: 3.2rem; font: 800 1.3rem var(--font-display); }
+
+/* Holding the blow button must not select its label or open a long-press menu, and it has to keep
+   working while other fingers tap the holes. */
+.play-keys, .play-keys *, .stage, .stage * {
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+}
+.blow-btn, .mic-btn, .key-btn { touch-action: manipulation; }
+.blow-btn { touch-action: none; }

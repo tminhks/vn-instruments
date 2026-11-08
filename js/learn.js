@@ -178,9 +178,18 @@
         stopListen = function () { timers.forEach(clearTimeout); };
         function finish() { state.listening = false; stopListen = null; completeStep(t(UI.heardAll)); render(false); }
       } else {
-        var stop = S.bauPhrase(function () { state.listening = false; stopListen = null; completeStep(t(UI.heardBau)); render(false); });
-        stopListen = stop || function () {};
-        if (!stop) { state.listening = false; render(false); }
+        // A short phrase on this page's own voice: rise, fall back, rise less, settle.
+        var v = pluckBau();
+        if (!v) { state.listening = false; render(false); return; }
+        var steps = [[450, 2], [1300, 0], [1900, 1.2], [2500, 0], [2900, 0.5], [3300, 0]];
+        steps.forEach(function (st) {
+          timers.push(setTimeout(function () {
+            v.bend(st[1]);
+            var bar = document.querySelector(".bau-string"); if (bar) bar.style.setProperty("--tilt", (-st[1] * 2.2) + "deg");
+          }, st[0]));
+        });
+        timers.push(setTimeout(function () { state.listening = false; stopListen = null; completeStep(t(UI.heardBau)); render(false); }, 4200));
+        stopListen = function () { timers.forEach(clearTimeout); stopVoice(); };
       }
     });
   }

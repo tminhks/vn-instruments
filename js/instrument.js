@@ -54,6 +54,11 @@
     micAsk: { en: "Allow the microphone when your browser asks. The sound never leaves your device.", vi: "Hãy cho phép micro khi trình duyệt hỏi. Âm thanh không rời khỏi thiết bị của bạn." },
     micDenied: { en: "The microphone is blocked, so blowing cannot be heard. Use the Hold to blow button instead, or allow the microphone in the browser settings.", vi: "Micro đang bị chặn nên không nghe được tiếng thổi. Hãy dùng nút Giữ để thổi, hoặc cho phép micro trong cài đặt trình duyệt." },
     micMissing: { en: "This browser cannot use the microphone here. Use the Hold to blow button instead.", vi: "Trình duyệt này không dùng được micro ở đây. Hãy dùng nút Giữ để thổi." },
+    micInsecure: { en: "The microphone only works on a secure (https) page, and this page is not one. Use the Hold to blow button instead.", vi: "Micro chỉ dùng được trên trang bảo mật (https), mà trang này không phải. Hãy dùng nút Giữ để thổi." },
+    micNone: { en: "No microphone was found on this device. Use the Hold to blow button instead.", vi: "Không tìm thấy micro trên thiết bị này. Hãy dùng nút Giữ để thổi." },
+    micHow: { en: "To allow it: tap the lock or settings icon beside the page address, choose Permissions, set Microphone to Allow, then reload. If the page opened inside another app (a QR scanner, Zalo, Facebook), open it in Chrome or Safari instead.", vi: "Cách cho phép: chạm biểu tượng ổ khóa hoặc cài đặt cạnh địa chỉ trang, chọn Quyền, đặt Micro thành Cho phép, rồi tải lại trang. Nếu trang đang mở trong một ứng dụng khác (trình quét QR, Zalo, Facebook), hãy mở bằng Chrome hoặc Safari." },
+    micWaiting: { en: "Waiting for your answer to the microphone question…", vi: "Đang chờ bạn trả lời câu hỏi cho phép micro…" },
+    micOther: { en: "The microphone could not start ({why}). Use the Hold to blow button instead.", vi: "Không bật được micro ({why}). Hãy dùng nút Giữ để thổi." },
     micTip: { en: "Use headphones: the flute sound can otherwise leak back into the microphone.", vi: "Nên đeo tai nghe: nếu không, tiếng sáo có thể lọt ngược vào micro." },
     micReady: { en: "Listening. Blow across the bottom edge of the phone.", vi: "Đang nghe. Hãy thổi vào cạnh dưới của điện thoại." },
     breath: { en: "Breath", vi: "Hơi thổi" },
@@ -494,12 +499,30 @@
     var b = document.getElementById("mic-btn");
     if (b) { b.setAttribute("aria-pressed", "false"); b.querySelector("span").textContent = t(UI.micOn); }
   }
+  function micFail(note, err) {
+    var name = err && err.name;
+    var msg;
+    if (name === "NotAllowedError" || name === "PermissionDeniedError") msg = t(UI.micDenied) + " " + t(UI.micHow);
+    else if (name === "NotFoundError" || name === "DevicesNotFoundError") msg = t(UI.micNone);
+    else if (name === "SecurityError") msg = t(UI.micInsecure);
+    else msg = fill(t(UI.micOther), { why: name || "unknown" });
+    note.textContent = msg;
+  }
   function startMic() {
     var md = navigator.mediaDevices, note = document.getElementById("mic-note");
+    if (window.isSecureContext === false) { note.textContent = t(UI.micInsecure); return; }
     if (!md || !md.getUserMedia) { note.textContent = t(UI.micMissing); return; }
-    note.textContent = t(UI.micAsk);
-    ensureFlute().then(function () {
-      return md.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: false, autoGainControl: false } });
+    note.textContent = t(UI.micWaiting);
+    // Both calls happen right here, inside the tap, because phones only show the permission
+    // question (and only start audio) when they are asked straight from a touch.
+    var c = audio();
+    if (c && c.state === "suspended") c.resume();
+    var asking;
+    try {
+      asking = md.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: false, autoGainControl: false } });
+    } catch (e) { micFail(note, e); return; }
+    asking.then(function (stream) {
+      return ensureFlute().then(function () { return stream; });
     }).then(function (stream) {
       var src = ctx.createMediaStreamSource(stream), an = ctx.createAnalyser(), hp = ctx.createBiquadFilter();
       hp.type = "highpass"; hp.frequency.value = 120; an.fftSize = 1024;
@@ -508,22 +531,20 @@
       mic = { stream: stream, src: src, raf: 0 };
       (function read() {
         an.getFloatTimeDomainData(data);
-        var s = 0;
-        for (var i = 0; i < data.length; i++) s += data[i] * data[i];
-        var rms = Math.sqrt(s / data.length);
+        var sum = 0;
+        for (var i = 0; i < data.length; i++) sum += data[i] * data[i];
+        var rms = Math.sqrt(sum / data.length);
         if (frames < 30) { floor = Math.max(floor, rms * 1.6); frames++; }     // first half second: learn the room noise
         var raw = Math.max(0, (rms - floor * 1.8) / 0.12);
         smooth += (raw - smooth) * (raw > smooth ? 0.5 : 0.18);
         breath.mic = Math.min(1.2, smooth);
         mic.raf = requestAnimationFrame(read);
       })();
-      var b = document.getElementById("mic-btn");
-      b.setAttribute("aria-pressed", "true"); b.querySelector("span").textContent = t(UI.micOff);
+      var btn = document.getElementById("mic-btn");
+      btn.setAttribute("aria-pressed", "true"); btn.querySelector("span").textContent = t(UI.micOff);
       note.textContent = t(UI.micReady) + " " + t(UI.micTip);
       say(t(UI.micReady));
-    }).catch(function (err) {
-      note.textContent = err && (err.name === "NotAllowedError" || err.name === "SecurityError") ? t(UI.micDenied) : t(UI.micMissing);
-    });
+    }).catch(function (err) { micFail(note, err); });
   }
 
   /* ================= page ================= */
@@ -777,12 +798,17 @@
     }
     var blow = document.getElementById("blow-btn");
     if (blow) {
-      var press = function (e) { breath.key = 0.55; ensureFlute(); e.preventDefault(); };
+      var press = function (e) {
+        breath.key = 0.55; ensureFlute(); e.preventDefault();
+        try { blow.setPointerCapture(e.pointerId); } catch (err) { /* pointer already gone */ }
+      };
+      blow.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+      blow.addEventListener("selectstart", function (e) { e.preventDefault(); });
       var release = function () { breath.key = 0; };
       blow.addEventListener("pointerdown", press);
       blow.addEventListener("pointerup", release);
       blow.addEventListener("pointercancel", release);
-      blow.addEventListener("pointerleave", release);
+      blow.addEventListener("lostpointercapture", release);
       blow.addEventListener("keydown", function (e) { if (e.key === " " || e.key === "Enter") { if (!e.repeat) press(e); e.preventDefault(); } });
       blow.addEventListener("keyup", function (e) { if (e.key === " " || e.key === "Enter") release(); });
       blow.addEventListener("blur", release);
