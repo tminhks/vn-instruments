@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learn · Ngũ Âm</title>
+  <meta name="title-vi" content="Bài học · Ngũ Âm">
+  <meta name="description" content="Short step-by-step lessons: play the five tones hò, xự, xang, xê, cống on the đàn tranh and bend a note on the đàn bầu.">
+  <meta name="theme-color" content="#154a3f">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/learn.css">
+</head>
+<body data-view="list">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="stamp" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="grain"/>
+      <feDisplacementMap in="SourceGraphic" in2="grain" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="9" result="blots"/>
+      <feColorMatrix in="blots" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.6 1.75" result="ink"/>
+      <feComposite in="rough" in2="ink" operator="in"/>
+    </filter>
+  </defs>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-replay" viewBox="0 0 24 24"><path d="M5 12a7 7 0 1 0 2.2-5.1M5 4.5v4h4"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></symbol>
+  <symbol id="i-sound-on" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.8 7.8 0 0 1 0 11"/></symbol>
+  <symbol id="i-sound-off" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4.2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.6-4.8 2.6.9-5.4-3.9-3.8 5.4-.8z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5z"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="7.5" y="7.5" width="9" height="9" rx="1"/></symbol>
+  <symbol id="i-five" viewBox="0 0 26 18"><path d="M1 3c4-3 7 2 12 0s8-2 12 0M1 6.5c4-3 7 2 12 0s8-2 12 0M1 10c4-3 7 2 12 0s8-2 12 0M1 13.5c4-3 7 2 12 0s8-2 12 0M1 17c4-3 7 2 12 0s8-2 12 0"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 420 28"><path d="M4 16H150c14 0 20-10 33-10 11 0 15 9 8 13-6 3-12-2-7-7M416 16H270c-14 0-20-10-33-10-11 0-15 9-8 13 6 3 12-2 7-7M196 14c4-6 10-6 14 0 4-6 10-6 14 0-4 6-10 6-14 0-4 6-10 6-14 0z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></symbol>
+  <symbol id="i-compare" viewBox="0 0 24 24"><path d="M4 7h11M11.5 3.5L15 7l-3.5 3.5M20 17H9M12.5 13.5L9 17l3.5 3.5"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main" data-vi="Bỏ qua, tới nội dung">Skip to content</a>
+
+<header class="site-nav" id="site-nav">
+  <nav class="navbar navbar-expand-lg" aria-label="Main" data-vi-label="Menu chính">
+    <div class="container-fluid nav-inner">
+      <a class="brand" href="HomePage.html">
+        <span class="brand-seal" aria-hidden="true"><svg class="icon" viewBox="0 0 26 18"><use href="#i-five"/></svg></span>
+        <span class="brand-name">Ngũ Âm</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-menu" aria-controls="nav-menu" aria-expanded="false" aria-label="Open menu" data-vi-label="Mở menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav-menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="HomePage.html" data-vi="Trang chủ">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="identify.html" data-vi="Nhận diện">Identify</a></li>
+          <li class="nav-item"><a class="nav-link" href="library.html" data-vi="Nhạc cụ">Instruments</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="learn.html" data-vi="Bài học">Learn</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="library.html#saved" id="nav-saved">
+              <span data-vi="Đã lưu">Saved</span>
+              <span class="saved-count" id="saved-count" hidden>0</span>
+            </a>
+          </li>
+        </ul>
+        <div class="nav-tools">
+          <button class="tool-btn" id="sound-toggle" type="button" aria-pressed="true" aria-label="Sound" data-vi-label="Âm thanh">
+            <svg class="icon on" aria-hidden="true"><use href="#i-sound-on"/></svg>
+            <svg class="icon off" aria-hidden="true"><use href="#i-sound-off"/></svg>
+            <span class="on" data-vi="Có tiếng">Sound on</span><span class="off" data-vi="Tắt tiếng">Sound off</span>
+          </button>
+          <div class="lang-switch" role="group" aria-label="Language" data-vi-label="Ngôn ngữ">
+            <button type="button" data-lang-btn="en" aria-pressed="true" lang="en">EN</button>
+            <button type="button" data-lang-btn="vi" aria-pressed="false" lang="vi">VI</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main id="main" class="ln">
+  <p class="visually-hidden" id="ln-live" role="status" aria-live="polite"></p>
+  <div id="ln-root"></div>
+</main>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <p class="colophon-seal" lang="vi" aria-hidden="true"><span>Ngũ</span><span>Âm</span></p>
+    <p class="colophon-lead" data-vi="Nhìn, nghe và chơi thử nhạc cụ dân tộc Việt Nam. Bản prototype cho môn CSCU9X5; mọi âm thanh đều được tạo ngay trong trình duyệt.">See, hear and play Vietnamese traditional instruments. A CSCU9X5 prototype; every sound is made in your browser.</p>
+    <h2 class="visually-hidden" data-vi="Nguồn">Credits</h2>
+    <ul class="credits">
+      <li><span data-vi="Thông tin nhạc cụ">Instrument facts</span>: <span data-vi="Wikipedia tiếng Anh, mỗi nhạc cụ ghi nguồn riêng ở phần “Đọc thêm”.">English Wikipedia; each instrument names its own page under “Read more”.</span></li>
+      <li><span data-vi="Ảnh đàn bầu">Đàn bầu photo</span>: Daderot, <a href="https://commons.wikimedia.org/wiki/File:Dan_bau_(monochord)_-_Vietnam_Museum_of_Ethnology_-_Hanoi,_Vietnam_-_DSC02538.JPG">Wikimedia Commons</a>, CC0.</li>
+      <li><span data-vi="Ảnh mẫu">Sample pictures</span>: <a href="https://huggingface.co/datasets/Dangindev/viet-cultural-vqa">Vietnamese Cultural VQA dataset</a>, Apache-2.0.</li>
+      <li><span data-vi="Nhận diện ảnh">Picture recognition</span>: <span data-vi="mô hình nhỏ chạy ngay trong trình duyệt (TensorFlow.js); ảnh của bạn không rời khỏi máy.">a small model that runs in your browser (TensorFlow.js); your picture never leaves your device.</span></li>
+      <li><span data-vi="Âm thanh">Sound</span>: <span data-vi="tạo trong trình duyệt bằng Web Audio API.">synthesised in the browser with the Web Audio API.</span></li>
+      <li><span data-vi="Phông chữ và thư viện">Fonts and libraries</span>: Alegreya, Alegreya Sans (SIL OFL), Bootstrap 5 (MIT).</li>
+    </ul>
+    <p class="fine" data-vi="Bài tập CSCU9X5 HCI-UI-UX, 2026. Mã sinh viên 30066757.">CSCU9X5 HCI-UI-UX coursework, 2026. Student ID 30066757.</p>
+  </div>
+</footer>
+
+<script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/data.js"></script>
+<script src="js/shapes.js"></script>
+<script src="js/site.js"></script>
+<script src="js/lessons.js"></script>
+<script src="js/learn.js"></script>
+</body>
+</html>

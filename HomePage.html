@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ngũ Âm · Vietnamese traditional instruments</title>
+  <meta name="title-vi" content="Ngũ Âm · Nhạc cụ dân tộc Việt Nam">
+  <meta name="description" content="Show Ngũ Âm a picture of a Vietnamese traditional instrument: it names it, lets you play it in the browser and tells you its story.">
+  <meta name="theme-color" content="#154a3f">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <script>
+    // Show the book cover on the first visit of a session (or when the URL has ?cover).
+    (function () {
+      var h = document.documentElement;
+      h.classList.add("js");
+      if (/[?&]cover\b/.test(location.search) || !sessionStorage.getItem("nguam.opened")) h.classList.add("is-cover");
+    })();
+  </script>
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="stamp" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="grain"/>
+      <feDisplacementMap in="SourceGraphic" in2="grain" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="9" result="blots"/>
+      <feColorMatrix in="blots" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.6 1.75" result="ink"/>
+      <feComposite in="rough" in2="ink" operator="in"/>
+    </filter>
+  </defs>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></symbol>
+  <symbol id="i-sound-on" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.8 7.8 0 0 1 0 11"/></symbol>
+  <symbol id="i-sound-off" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4.2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.6-4.8 2.6.9-5.4-3.9-3.8 5.4-.8z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5z"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="7.5" y="7.5" width="9" height="9" rx="1"/></symbol>
+  <symbol id="i-five" viewBox="0 0 26 18"><path d="M1 3c4-3 7 2 12 0s8-2 12 0M1 6.5c4-3 7 2 12 0s8-2 12 0M1 10c4-3 7 2 12 0s8-2 12 0M1 13.5c4-3 7 2 12 0s8-2 12 0M1 17c4-3 7 2 12 0s8-2 12 0"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 420 28"><path d="M4 16H150c14 0 20-10 33-10 11 0 15 9 8 13-6 3-12-2-7-7M416 16H270c-14 0-20-10-33-10-11 0-15 9-8 13 6 3 12-2 7-7M196 14c4-6 10-6 14 0 4-6 10-6 14 0-4 6-10 6-14 0-4 6-10 6-14 0z"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main" data-vi="Bỏ qua, tới nội dung">Skip to content</a>
+
+<header class="site-nav" id="site-nav">
+  <nav class="navbar navbar-expand-lg" aria-label="Main" data-vi-label="Menu chính">
+    <div class="container-fluid nav-inner">
+      <a class="brand" href="HomePage.html">
+        <span class="brand-seal" aria-hidden="true"><svg class="icon" viewBox="0 0 26 18"><use href="#i-five"/></svg></span>
+        <span class="brand-name">Ngũ Âm</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-menu" aria-controls="nav-menu" aria-expanded="false" aria-label="Open menu" data-vi-label="Mở menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav-menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="HomePage.html" data-vi="Trang chủ">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="identify.html" data-vi="Nhận diện">Identify</a></li>
+          <li class="nav-item"><a class="nav-link" href="library.html" data-vi="Nhạc cụ">Instruments</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn.html" data-vi="Bài học">Learn</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="library.html#saved">
+              <span data-vi="Đã lưu">Saved</span>
+              <span class="saved-count" id="saved-count" hidden>0</span>
+            </a>
+          </li>
+        </ul>
+        <div class="nav-tools">
+          <button class="tool-btn" id="sound-toggle" type="button" aria-pressed="true" aria-label="Sound" data-vi-label="Âm thanh">
+            <svg class="icon on" aria-hidden="true"><use href="#i-sound-on"/></svg>
+            <svg class="icon off" aria-hidden="true"><use href="#i-sound-off"/></svg>
+            <span class="on" data-vi="Có tiếng">Sound on</span><span class="off" data-vi="Tắt tiếng">Sound off</span>
+          </button>
+          <div class="lang-switch" role="group" aria-label="Language" data-vi-label="Ngôn ngữ">
+            <button type="button" data-lang-btn="en" aria-pressed="true" lang="en">EN</button>
+            <button type="button" data-lang-btn="vi" aria-pressed="false" lang="vi">VI</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- Scene 1: the village. The book cover opens onto it. -->
+  <section class="stage" aria-labelledby="hero-title">
+   <div class="canvas">
+    <div class="art">
+      <picture>
+        <source type="image/webp" srcset="assets/img/hero-1600.webp 1600w, assets/img/hero-2752.webp 2752w" sizes="(min-width: 1100px) 100vw, 200vw">
+        <img src="assets/img/hero-1600.jpg" srcset="assets/img/hero-1600.jpg 1600w, assets/img/hero-2752.jpg 2752w" sizes="(min-width: 1100px) 100vw, 200vw"
+             width="2752" height="1536" fetchpriority="high"
+             alt="Illustration of a Vietnamese village: beside a communal house and a banyan tree, villagers play the đàn nguyệt, đàn tranh, đàn bầu, bamboo flute, drums and gongs, and five silk ribbons of music float over rice terraces and limestone hills."
+             data-vi-alt="Tranh minh họa một làng quê Việt Nam: bên đình làng và cây đa, dân làng chơi đàn nguyệt, đàn tranh, đàn bầu, sáo trúc, trống và cồng chiêng, năm dải lụa âm nhạc bay qua ruộng bậc thang và núi đá.">
+      </picture>
+      <svg class="ribbons" viewBox="0 0 2752 1536" preserveAspectRatio="none" role="group" aria-label="Five ribbons, one for each tone" data-vi-label="Năm dải lụa, mỗi dải một âm">
+        <defs><filter id="glow" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="7"/></filter></defs>
+        <g>
+          <path class="ribbon-swell" stroke="#fffbe8" d="M850,0 C859,10 880,42 905,60 C930,78 968,98 1000,110 C1032,122 1070,122 1100,130 C1130,138 1157,145 1180,160 C1203,175 1223,197 1240,220 C1257,243 1267,273 1280,300 C1293,327 1303,353 1320,380 C1337,407 1358,437 1380,460 C1402,483 1422,506 1450,520 C1478,534 1517,542 1550,545 C1583,548 1617,548 1650,540 C1683,532 1720,512 1750,500 C1780,488 1805,470 1830,470 C1855,470 1878,485 1900,500 C1922,515 1937,545 1960,560 C1983,575 2012,582 2040,590 C2068,598 2111,605 2125,608"/>
+          <path class="ribbon-light" d="M850,0 C859,10 880,42 905,60 C930,78 968,98 1000,110 C1032,122 1070,122 1100,130 C1130,138 1157,145 1180,160 C1203,175 1223,197 1240,220 C1257,243 1267,273 1280,300 C1293,327 1303,353 1320,380 C1337,407 1358,437 1380,460 C1402,483 1422,506 1450,520 C1478,534 1517,542 1550,545 C1583,548 1617,548 1650,540 C1683,532 1720,512 1750,500 C1780,488 1805,470 1830,470 C1855,470 1878,485 1900,500 C1922,515 1937,545 1960,560 C1983,575 2012,582 2040,590 C2068,598 2111,605 2125,608"/>
+          <path class="ribbon-hit" tabindex="0" role="button" aria-label="Play Hò, the note C" data-vi-label="Chơi âm Hò" d="M850,0 C859,10 880,42 905,60 C930,78 968,98 1000,110 C1032,122 1070,122 1100,130 C1130,138 1157,145 1180,160 C1203,175 1223,197 1240,220 C1257,243 1267,273 1280,300 C1293,327 1303,353 1320,380 C1337,407 1358,437 1380,460 C1402,483 1422,506 1450,520 C1478,534 1517,542 1550,545 C1583,548 1617,548 1650,540 C1683,532 1720,512 1750,500 C1780,488 1805,470 1830,470 C1855,470 1878,485 1900,500 C1922,515 1937,545 1960,560 C1983,575 2012,582 2040,590 C2068,598 2111,605 2125,608"/>
+          <path class="ribbon-focus" d="M850,0 C859,10 880,42 905,60 C930,78 968,98 1000,110 C1032,122 1070,122 1100,130 C1130,138 1157,145 1180,160 C1203,175 1223,197 1240,220 C1257,243 1267,273 1280,300 C1293,327 1303,353 1320,380 C1337,407 1358,437 1380,460 C1402,483 1422,506 1450,520 C1478,534 1517,542 1550,545 C1583,548 1617,548 1650,540 C1683,532 1720,512 1750,500 C1780,488 1805,470 1830,470 C1855,470 1878,485 1900,500 C1922,515 1937,545 1960,560 C1983,575 2012,582 2040,590 C2068,598 2111,605 2125,608"/>
+        </g>
+        <g>
+          <path class="ribbon-swell" stroke="#fffbe8" d="M560,190 C575,187 618,176 650,170 C682,164 722,151 750,152 C778,153 798,162 820,175 C842,188 857,215 880,230 C903,245 930,260 960,265 C990,270 1028,262 1060,260 C1092,258 1125,245 1150,250 C1175,255 1193,272 1210,290 C1227,308 1243,348 1250,360"/>
+          <path class="ribbon-light" d="M560,190 C575,187 618,176 650,170 C682,164 722,151 750,152 C778,153 798,162 820,175 C842,188 857,215 880,230 C903,245 930,260 960,265 C990,270 1028,262 1060,260 C1092,258 1125,245 1150,250 C1175,255 1193,272 1210,290 C1227,308 1243,348 1250,360"/>
+          <path class="ribbon-hit" tabindex="0" role="button" aria-label="Play Xự, the note D" data-vi-label="Chơi âm Xự" d="M560,190 C575,187 618,176 650,170 C682,164 722,151 750,152 C778,153 798,162 820,175 C842,188 857,215 880,230 C903,245 930,260 960,265 C990,270 1028,262 1060,260 C1092,258 1125,245 1150,250 C1175,255 1193,272 1210,290 C1227,308 1243,348 1250,360"/>
+          <path class="ribbon-focus" d="M560,190 C575,187 618,176 650,170 C682,164 722,151 750,152 C778,153 798,162 820,175 C842,188 857,215 880,230 C903,245 930,260 960,265 C990,270 1028,262 1060,260 C1092,258 1125,245 1150,250 C1175,255 1193,272 1210,290 C1227,308 1243,348 1250,360"/>
+        </g>
+        <g>
+          <path class="ribbon-swell" stroke="#fffbe8" d="M1200,0 C1210,8 1245,28 1262,50 C1279,72 1290,100 1300,130 C1310,160 1312,200 1322,230 C1332,260 1346,287 1362,310 C1378,333 1397,352 1420,370 C1443,388 1470,408 1500,420 C1530,432 1567,440 1600,440 C1633,440 1670,426 1700,420 C1730,414 1758,403 1780,405 C1802,407 1813,418 1830,430 C1847,442 1858,465 1880,480 C1902,495 1933,512 1960,520 C1987,528 2017,523 2040,530 C2063,537 2082,545 2100,560 C2118,575 2138,605 2150,620 C2162,635 2167,645 2170,650"/>
+          <path class="ribbon-light" d="M1200,0 C1210,8 1245,28 1262,50 C1279,72 1290,100 1300,130 C1310,160 1312,200 1322,230 C1332,260 1346,287 1362,310 C1378,333 1397,352 1420,370 C1443,388 1470,408 1500,420 C1530,432 1567,440 1600,440 C1633,440 1670,426 1700,420 C1730,414 1758,403 1780,405 C1802,407 1813,418 1830,430 C1847,442 1858,465 1880,480 C1902,495 1933,512 1960,520 C1987,528 2017,523 2040,530 C2063,537 2082,545 2100,560 C2118,575 2138,605 2150,620 C2162,635 2167,645 2170,650"/>
+          <path class="ribbon-hit" tabindex="0" role="button" aria-label="Play Xang, the note F" data-vi-label="Chơi âm Xang" d="M1200,0 C1210,8 1245,28 1262,50 C1279,72 1290,100 1300,130 C1310,160 1312,200 1322,230 C1332,260 1346,287 1362,310 C1378,333 1397,352 1420,370 C1443,388 1470,408 1500,420 C1530,432 1567,440 1600,440 C1633,440 1670,426 1700,420 C1730,414 1758,403 1780,405 C1802,407 1813,418 1830,430 C1847,442 1858,465 1880,480 C1902,495 1933,512 1960,520 C1987,528 2017,523 2040,530 C2063,537 2082,545 2100,560 C2118,575 2138,605 2150,620 C2162,635 2167,645 2170,650"/>
+          <path class="ribbon-focus" d="M1200,0 C1210,8 1245,28 1262,50 C1279,72 1290,100 1300,130 C1310,160 1312,200 1322,230 C1332,260 1346,287 1362,310 C1378,333 1397,352 1420,370 C1443,388 1470,408 1500,420 C1530,432 1567,440 1600,440 C1633,440 1670,426 1700,420 C1730,414 1758,403 1780,405 C1802,407 1813,418 1830,430 C1847,442 1858,465 1880,480 C1902,495 1933,512 1960,520 C1987,528 2017,523 2040,530 C2063,537 2082,545 2100,560 C2118,575 2138,605 2150,620 C2162,635 2167,645 2170,650"/>
+        </g>
+        <g>
+          <path class="ribbon-swell" stroke="#fffbe8" d="M1200,380 C1204,392 1212,425 1222,450 C1232,475 1245,507 1262,530 C1279,553 1299,573 1322,590 C1345,607 1374,621 1400,630 C1426,639 1453,645 1480,645 C1507,645 1533,638 1560,630 C1587,622 1617,608 1640,600 C1663,592 1680,587 1700,585 C1720,583 1738,586 1760,590 C1782,594 1812,602 1830,612 C1848,622 1860,634 1868,652 C1876,670 1878,699 1880,720 C1882,741 1880,770 1880,780"/>
+          <path class="ribbon-light" d="M1200,380 C1204,392 1212,425 1222,450 C1232,475 1245,507 1262,530 C1279,553 1299,573 1322,590 C1345,607 1374,621 1400,630 C1426,639 1453,645 1480,645 C1507,645 1533,638 1560,630 C1587,622 1617,608 1640,600 C1663,592 1680,587 1700,585 C1720,583 1738,586 1760,590 C1782,594 1812,602 1830,612 C1848,622 1860,634 1868,652 C1876,670 1878,699 1880,720 C1882,741 1880,770 1880,780"/>
+          <path class="ribbon-hit" tabindex="0" role="button" aria-label="Play Xê, the note G" data-vi-label="Chơi âm Xê" d="M1200,380 C1204,392 1212,425 1222,450 C1232,475 1245,507 1262,530 C1279,553 1299,573 1322,590 C1345,607 1374,621 1400,630 C1426,639 1453,645 1480,645 C1507,645 1533,638 1560,630 C1587,622 1617,608 1640,600 C1663,592 1680,587 1700,585 C1720,583 1738,586 1760,590 C1782,594 1812,602 1830,612 C1848,622 1860,634 1868,652 C1876,670 1878,699 1880,720 C1882,741 1880,770 1880,780"/>
+          <path class="ribbon-focus" d="M1200,380 C1204,392 1212,425 1222,450 C1232,475 1245,507 1262,530 C1279,553 1299,573 1322,590 C1345,607 1374,621 1400,630 C1426,639 1453,645 1480,645 C1507,645 1533,638 1560,630 C1587,622 1617,608 1640,600 C1663,592 1680,587 1700,585 C1720,583 1738,586 1760,590 C1782,594 1812,602 1830,612 C1848,622 1860,634 1868,652 C1876,670 1878,699 1880,720 C1882,741 1880,770 1880,780"/>
+        </g>
+        <g>
+          <path class="ribbon-swell" stroke="#fffbe8" d="M1500,640 C1520,634 1577,615 1620,605 C1663,595 1717,580 1760,580 C1803,580 1847,594 1880,605 C1913,616 1936,640 1960,648 C1984,656 2005,645 2022,652 C2039,659 2054,685 2060,692"/>
+          <path class="ribbon-light" d="M1500,640 C1520,634 1577,615 1620,605 C1663,595 1717,580 1760,580 C1803,580 1847,594 1880,605 C1913,616 1936,640 1960,648 C1984,656 2005,645 2022,652 C2039,659 2054,685 2060,692"/>
+          <path class="ribbon-hit" tabindex="0" role="button" aria-label="Play Cống, the note A" data-vi-label="Chơi âm Cống" d="M1500,640 C1520,634 1577,615 1620,605 C1663,595 1717,580 1760,580 C1803,580 1847,594 1880,605 C1913,616 1936,640 1960,648 C1984,656 2005,645 2022,652 C2039,659 2054,685 2060,692"/>
+          <path class="ribbon-focus" d="M1500,640 C1520,634 1577,615 1620,605 C1663,595 1717,580 1760,580 C1803,580 1847,594 1880,605 C1913,616 1936,640 1960,648 C1984,656 2005,645 2022,652 C2039,659 2054,685 2060,692"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="cover">
+      <div class="cover-frame" aria-hidden="true"></div>
+      <div class="cover-body">
+        <img class="cover-logo" src="assets/img/logo-cream.png" width="512" height="512" alt="">
+        <p class="cover-title" lang="vi">Ngũ Âm</p>
+        <svg class="cloud-rule icon" viewBox="0 0 420 28" aria-hidden="true"><use href="#i-cloud"/></svg>
+        <p class="cover-meaning" data-vi="Năm âm của nhạc Việt: hò, xự, xang, xê, cống.">“The five tones” of Vietnamese music: hò, xự, xang, xê, cống.</p>
+        <p class="cover-sub" data-vi="Thấy một nhạc cụ dân tộc mà chưa biết tên? Nghe nó, chơi thử nó và biết câu chuyện của nó.">Seen a Vietnamese instrument and don't know its name? Hear it, play it and learn its story.</p>
+        <button class="btn-begin" id="begin" type="button">
+          <span data-vi="Mở sách">Open the book</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </button>
+        <p class="cover-hint" data-vi="hoặc nhấn <kbd>Enter</kbd>, hoặc cuộn xuống">or press <kbd>Enter</kbd>, or scroll down</p>
+      </div>
+    </div>
+
+    <p class="ribbon-hint">
+      <svg class="five icon" viewBox="0 0 26 18" aria-hidden="true"><use href="#i-five"/></svg>
+      <span><span data-vi="Chạm vào dải lụa để nghe năm âm">Touch a ribbon to hear the five tones</span><span class="keys" data-vi=", hoặc nhấn phím 1 đến 5">, or press keys 1 to 5</span></span>
+    </p>
+    <div class="note-tag" aria-hidden="true"></div>
+    <p class="visually-hidden" id="note-live" aria-live="polite"></p>
+   </div>
+
+    <div class="hero-copy">
+      <h1 id="hero-title" data-vi="Đây là nhạc cụ gì?">What instrument is that?</h1>
+      <p class="lede" data-vi="Đưa cho Ngũ Âm một bức ảnh: web sẽ gọi tên nhạc cụ, cho bạn chơi thử và kể câu chuyện của nó.">Show Ngũ Âm a picture. It names the instrument, lets you play it and tells you its story.</p>
+      <ul class="seals">
+        <li>
+          <a class="seal-link is-main" href="identify.html">
+            <span class="seal" lang="vi" aria-hidden="true"><span>Nhận</span><span>diện</span></span>
+            <span class="seal-label">
+              <span class="seal-title" data-vi="Nhận diện nhạc cụ">Identify an instrument</span>
+              <span class="seal-desc" data-vi="Không cần biết tên: ảnh chụp, tranh vẽ hay ảnh chụp màn hình phim đều được">No name needed: a photo, a painting or a film screenshot is enough</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="seal-link" href="instrument.html?id=dan-tranh">
+            <span class="seal" lang="vi" aria-hidden="true"><span>Chơi</span><span>đàn</span></span>
+            <span class="seal-label">
+              <span class="seal-title" data-vi="Chơi thử nhạc cụ">Play an instrument</span>
+              <span class="seal-desc" data-vi="Gảy dây đàn tranh bằng chuột hoặc bàn phím">Pluck the strings of a đàn tranh</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="seal-link" href="library.html">
+            <span class="seal" lang="vi" aria-hidden="true"><span>Câu</span><span>chuyện</span></span>
+            <span class="seal-label">
+              <span class="seal-title" data-vi="Khám phá câu chuyện">Discover their stories</span>
+              <span class="seal-desc" data-vi="Nguồn gốc và lịch sử của từng nhạc cụ">Where each instrument comes from</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="after-stage">
+    <!-- Scene 2: one instrument introduces itself -->
+    <section class="scene scene-today" aria-labelledby="today-title">
+      <div class="scene-art">
+        <picture><source type="image/webp" srcset="assets/img/scene-bau.webp"><img src="assets/img/scene-bau.jpg" width="1920" height="1072" loading="lazy" alt=""></picture>
+      </div>
+      <div class="scene-text">
+        <p class="date-seal" lang="vi" aria-hidden="true"><span>Hôm</span><span>nay</span></p>
+        <h2 id="today-title" data-vi="Hôm nay: đàn bầu">Today: the đàn bầu</h2>
+        <p class="say" data-vi="Đàn độc huyền · đọc là <b>đàn bầu</b>">Monochord · say it <b>“dahn bow”</b></p>
+        <p class="story" data-vi="Chỉ một dây đàn, một hộp gỗ và một chiếc cần mềm. Người chơi chạm nhẹ vào dây ở các điểm bồi âm và uốn cần đàn, nên một dây duy nhất có thể ngân, lướt và hát như giọng người.">One string, one wooden box and a flexible rod. The player touches the string lightly at its harmonic points and bends the rod, so a single string can glide, sigh and sing like a human voice.</p>
+        <div class="today-actions">
+          <button class="btn-listen" id="listen-bau" type="button" aria-pressed="false">
+            <span class="listen-mark" aria-hidden="true">
+              <svg class="icon play"><use href="#i-play"/></svg><svg class="icon stop"><use href="#i-stop"/></svg>
+            </span>
+            <span class="play" data-vi="Nghe đàn bầu">Listen to the đàn bầu</span>
+            <span class="stop" data-vi="Dừng">Stop</span>
+          </button>
+          <a class="ink-link" href="instrument.html?id=dan-bau">
+            <span data-vi="Tự chơi thử">Play it yourself</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+        <figure class="specimen">
+          <picture>
+            <source type="image/webp" srcset="assets/img/dan-bau.webp">
+            <img src="assets/img/dan-bau.jpg" width="1700" height="915" loading="lazy"
+                 alt="A real đàn bầu on display: a long wooden box with a single string and a thin rod rising from one end."
+                 data-vi-alt="Một cây đàn bầu thật đang trưng bày: hộp gỗ dài, một dây đàn và cần đàn mảnh dựng ở một đầu.">
+          </picture>
+          <figcaption data-vi="Cây đàn thật, Bảo tàng Dân tộc học Việt Nam, Hà Nội. Ảnh: Daderot, CC0.">The real thing, Vietnam Museum of Ethnology, Hanoi. Photo: Daderot, CC0.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Scene 3: evening on the river, the phone version and the colophon -->
+    <section class="scene scene-end" aria-labelledby="phone-title">
+      <div class="scene-art">
+        <picture><source type="image/webp" srcset="assets/img/scene-end.webp"><img src="assets/img/scene-end.jpg" width="1920" height="1072" loading="lazy" alt=""></picture>
+      </div>
+      <div class="scene-text phone-note">
+        <div class="qr"><img src="assets/img/qr-phone.png" width="300" height="300" alt="QR code for the phone version of Ngũ Âm" data-vi-alt="Mã QR mở bản điện thoại của Ngũ Âm"></div>
+        <div>
+          <h2 id="phone-title" data-vi="Mang theo trên điện thoại">Take it on your phone</h2>
+          <p class="on-desktop" data-vi="Quét mã để mở bản điện thoại: gảy đàn tranh bằng nhiều ngón cùng lúc, và nghiêng máy để uốn tiếng đàn bầu.">Scan the code to open the phone version: pluck the đàn tranh with several fingers at once, and tilt the phone to bend the đàn bầu.</p>
+          <p class="on-phone" data-vi="Bản điện thoại cho bạn gảy đàn tranh bằng nhiều ngón cùng lúc, và nghiêng máy để uốn tiếng đàn bầu.">The phone version lets you pluck the đàn tranh with several fingers at once, and tilt the phone to bend the đàn bầu.</p>
+          <p><a class="ink-link" href="https://tminhks.github.io/vn-instruments/">tminhks.github.io/vn-instruments</a></p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="colophon after-stage">
+  <div class="colophon-inner">
+    <p class="colophon-seal" lang="vi" aria-hidden="true"><span>Ngũ</span><span>Âm</span></p>
+    <p class="colophon-lead" data-vi="Nhìn, nghe và chơi thử nhạc cụ dân tộc Việt Nam. Bản prototype cho môn CSCU9X5; mọi âm thanh đều được tạo ngay trong trình duyệt.">See, hear and play Vietnamese traditional instruments. A CSCU9X5 prototype; every sound is made in your browser.</p>
+    <h2 class="visually-hidden" data-vi="Nguồn">Credits</h2>
+    <ul class="credits">
+      <li><span data-vi="Tranh minh họa">Illustrations</span>: <span data-vi="vẽ riêng cho Ngũ Âm; nguồn và công cụ ghi trong báo cáo.">made for Ngũ Âm; sources and tools are listed in the report.</span></li>
+      <li><span data-vi="Ảnh đàn bầu">Đàn bầu photo</span>: Daderot, <a href="https://commons.wikimedia.org/wiki/File:Dan_bau_(monochord)_-_Vietnam_Museum_of_Ethnology_-_Hanoi,_Vietnam_-_DSC02538.JPG">Wikimedia Commons</a>, CC0.</li>
+      <li><span data-vi="Âm thanh">Sound</span>: <span data-vi="tạo trong trình duyệt bằng Web Audio API.">synthesised in the browser with the Web Audio API.</span></li>
+      <li><span data-vi="Thông tin đàn bầu">Đàn bầu facts</span>: <a href="https://en.wikipedia.org/wiki/%C4%90%C3%A0n_b%E1%BA%A7u">Wikipedia, “Đàn bầu”</a>.</li>
+      <li><span data-vi="Phông chữ và thư viện">Fonts and libraries</span>: Alegreya, Alegreya Sans (SIL OFL), Bootstrap 5 (MIT).</li>
+    </ul>
+    <p class="fine" data-vi="Bài tập CSCU9X5 HCI-UI-UX, 2026. Mã sinh viên 30066757.">CSCU9X5 HCI-UI-UX coursework, 2026. Student ID 30066757.</p>
+  </div>
+</footer>
+
+<script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/site.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

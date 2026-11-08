@@ -1,0 +1,198 @@
+/* Ngũ Âm: shared styles for every page (tokens, paper, navigation, seals, colophon). */
+
+:root {
+  --ink: #123b33;          /* body text, deep green-black */
+  --ink-soft: #2e5b51;     /* secondary text on light grounds */
+  --jade: #17654f;         /* links and focus, 5.6:1 on the paper */
+  --jade-hover: #0f5240;
+  --jade-deep: #154a3f;
+  --jade-night: #0e3029;
+  --mint: #d2f2de;
+  --mint-soft: #e7f5ea;
+  --cream: #f2f6e4;        /* the painting's sky */
+  --paper: #f0e7d4;        /* aged do paper, the same paper the paintings are drawn on */
+  --vermilion: #b8392a;    /* seal ink */
+  --vermilion-deep: #9c2d20;
+  --ochre: #c9963a;
+  --line: rgba(18, 59, 51, 0.24);
+
+  --font-display: "Alegreya", Georgia, "Times New Roman", serif;
+  --font-text: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+
+  --nav-h: 64px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-ink: cubic-bezier(0.65, 0, 0.25, 1);
+
+  --bs-body-font-family: var(--font-text);
+  --bs-body-color: var(--ink);
+  --bs-body-bg: var(--paper);
+  --bs-link-color-rgb: 31, 122, 100;
+  --bs-link-hover-color-rgb: 23, 101, 79;
+  --bs-focus-ring-color: rgba(31, 122, 100, 0.35);
+}
+
+html { scrollbar-color: var(--jade) var(--paper); scroll-padding-top: calc(var(--nav-h) + 12px); }
+body {
+  font-family: var(--font-text);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper) url("../assets/img/paper.webp") repeat;
+  background-size: 640px 640px;
+  caret-color: var(--jade);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: rgba(184, 57, 42, 0.2); color: var(--ink); }
+
+h1, h2, h3, .display { font-family: var(--font-display); font-weight: 700; line-height: 1.08; letter-spacing: -0.01em; text-wrap: balance; color: inherit; }
+p { text-wrap: pretty; }
+a { color: var(--jade); text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+a:hover { color: var(--jade-hover); }
+
+:focus-visible { outline: 3px solid var(--jade); outline-offset: 4px; border-radius: 4px; }
+.on-dark :focus-visible { outline-color: var(--ochre); }
+
+.icon { width: 1.25em; height: 1.25em; flex: none; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; vertical-align: -0.2em; }
+
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 2000;
+  background: var(--ink); color: var(--cream); padding: 0.6rem 1rem; border-radius: 4px; text-decoration: none;
+}
+.skip-link:focus, .skip-link:hover { top: 1rem; color: var(--cream); }
+.container { padding-inline: clamp(1.25rem, 5vw, 2rem); }
+
+/* ---------- Navigation: a strip of paper with an ink rule ---------- */
+.site-nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 1000; height: var(--nav-h);
+  background: var(--paper) url("../assets/img/paper.webp") repeat;
+  background-size: 640px 640px;
+  border-bottom: 1px solid var(--line);
+}
+.site-nav::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: rgba(18, 59, 51, 0.1); }
+.site-nav .navbar { height: 100%; padding: 0; }
+.nav-inner { height: 100%; padding-inline: clamp(1rem, 3vw, 2.5rem); }
+.brand { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--ink); }
+.brand:hover { color: var(--ink); }
+.brand-seal { width: 32px; height: 32px; display: grid; place-items: center; color: #f6ead2; }
+.brand-seal .icon { width: 22px; height: 16px; stroke-width: 1.6; }
+.brand-name { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; line-height: 1; letter-spacing: -0.01em; }
+
+.site-nav .nav-link {
+  position: relative; color: var(--ink); font-weight: 500; font-size: 1.08rem; padding: 0.5rem 0.9rem !important;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+}
+.site-nav .nav-link::after {
+  content: ""; position: absolute; left: 0.9rem; right: 0.9rem; bottom: 0.2rem; height: 2px; border-radius: 2px;
+  background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform 0.35s var(--ease-ink);
+}
+.site-nav .nav-link:hover { color: var(--ink); }
+.site-nav .nav-link:hover::after { transform: scaleX(1); }
+.site-nav .nav-link.active { color: var(--ink); font-weight: 700; }
+.site-nav .nav-link.active::before {
+  content: ""; width: 7px; height: 7px; border-radius: 1px; background: var(--vermilion); transform: rotate(45deg);
+}
+.saved-count {
+  min-width: 1.35rem; height: 1.35rem; padding: 0 0.3rem; border-radius: 2px;
+  background: var(--vermilion); color: #fff; font-size: 0.78rem; font-weight: 700;
+  display: inline-grid; place-items: center; font-variant-numeric: tabular-nums;
+}
+.saved-count[hidden] { display: none; }
+
+.nav-tools { display: flex; align-items: center; gap: 1rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--line); }
+.tool-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem; height: 40px; padding: 0 0.25rem;
+  border: 0; background: transparent; color: var(--ink); font: 500 1rem var(--font-text);
+}
+.tool-btn:hover { color: var(--jade); }
+.tool-btn .off { display: none; }
+.tool-btn[aria-pressed="false"] .on { display: none; }
+.tool-btn[aria-pressed="false"] .off { display: inline; }
+
+.lang-switch { display: inline-flex; align-items: center; height: 40px; }
+.lang-switch button {
+  border: 0; background: transparent; color: var(--ink-soft); font: 500 1rem var(--font-text);
+  padding: 0.25rem 0.45rem; position: relative;
+}
+.lang-switch button + button::before { content: "/"; position: absolute; left: -0.25rem; color: var(--line); }
+.lang-switch button[aria-pressed="true"] { color: var(--ink); font-weight: 700; text-decoration: underline 2px var(--vermilion); text-underline-offset: 0.35em; }
+
+.navbar-toggler { border: 1px solid var(--line); border-radius: 4px; padding: 0.4rem 0.6rem; color: var(--ink); }
+.navbar-toggler:focus { box-shadow: none; }
+
+@media (max-width: 991.98px) {
+  .site-nav .navbar-collapse {
+    position: absolute; top: var(--nav-h); left: 0; right: 0;
+    background: var(--paper) url("../assets/img/paper.webp") repeat; background-size: 640px 640px;
+    border-bottom: 1px solid var(--line);
+    padding: 0.75rem clamp(1rem, 3vw, 2.5rem) 1.25rem;
+    box-shadow: 0 18px 30px -24px rgba(14, 48, 41, 0.6);
+  }
+  .site-nav .nav-link { padding: 0.7rem 0.25rem !important; }
+  .site-nav .nav-link::after { left: 0.25rem; right: auto; width: 3rem; }
+  .nav-tools { margin: 0.75rem 0 0; padding: 0.75rem 0 0; border-left: 0; border-top: 1px solid var(--line); }
+}
+
+/* ---------- Seals: square vermilion stamps used as marks and actions ---------- */
+.seal {
+  display: inline-grid; place-content: center; flex: none;
+  width: 58px; height: 58px; padding: 4px; border-radius: 4px;
+  color: #fbf1dc;
+  font: 700 0.95rem/1 var(--font-display); text-align: center; letter-spacing: 0.01em;
+}
+.seal > span { display: block; }
+.seal > span + span { margin-top: 0.12em; }
+
+/* Every seal shares this: the vermilion ink with its rough, uneven print sits on a
+   layer behind the letters, so the letters stay sharp and readable. */
+.seal, .brand-seal, .colophon-seal, .date-seal, .note-tag {
+  position: relative; isolation: isolate;
+  /* solid ink under the letters; the rough print shows only at the edges */
+  background: var(--vermilion) content-box; padding: 5px;
+}
+.seal::before, .brand-seal::before, .colophon-seal::before, .date-seal::before, .note-tag::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 3px;
+  background: var(--vermilion);
+  box-shadow: inset 0 0 0 2px var(--vermilion), inset 0 0 0 3.5px rgba(251, 241, 220, 0.7);
+  filter: url(#stamp);
+}
+
+/* Ink link: text with a brush underline */
+.ink-link {
+  display: inline-flex; align-items: center; gap: 0.45rem; color: var(--ink); font-weight: 700; text-decoration: none;
+  background: linear-gradient(var(--ink), var(--ink)) no-repeat left bottom / 100% 2px; padding-bottom: 0.15rem;
+  transition: background-size 0.4s var(--ease-ink), color 0.2s;
+}
+.ink-link:hover { color: var(--vermilion-deep); background-size: 40% 2px; }
+.ink-link .icon { transition: transform 0.3s var(--ease-out); }
+.ink-link:hover .icon { transform: translateX(4px); }
+
+/* Cloud-scroll ornament, drawn once as a symbol and reused */
+.cloud-rule { display: block; width: min(420px, 80%); height: 28px; margin-inline: auto; color: var(--ochre); }
+.cloud-rule.ink-rule { color: rgba(18, 59, 51, 0.45); stroke-width: 1.3; }
+
+/* ---------- Colophon: the last page of the book ---------- */
+.colophon { padding: 3rem 0 3.5rem; font-size: 1rem; color: var(--ink-soft); }
+.colophon-inner { max-width: 44rem; margin: 0 auto; padding-inline: clamp(1.25rem, 5vw, 2rem); text-align: center; }
+.colophon-seal {
+  width: 52px; height: 52px; margin: 0 auto 1.1rem; display: grid; place-content: center;
+  color: #fbf1dc; font: 800 0.9rem/1.05 var(--font-display);
+}
+.colophon-seal span { display: block; }
+.colophon-lead { font-family: var(--font-display); font-size: 1.2rem; color: var(--ink); margin-bottom: 1.4rem; }
+.colophon .credits { list-style: none; padding: 0; margin: 0 0 1.4rem; display: grid; gap: 0.3rem; font-size: 0.98rem; }
+.colophon .credits a { color: var(--jade); }
+.colophon .fine { font-size: 0.92rem; padding-top: 1rem; border-top: 1px solid var(--line); margin: 0; }
+
+.visually-hidden-focusable:not(:focus):not(:focus-within) { position: absolute !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- Logo: the seal with five leaves ---------- */
+.brand-seal { width: 40px; height: 40px; padding: 0; background: none; }
+.brand-seal::before { background: url("../assets/img/logo.png") center / contain no-repeat; box-shadow: none; filter: none; border-radius: 0; }
+.brand-seal .icon { display: none; }
+.colophon-seal { width: 84px; height: 84px; padding: 0; margin-bottom: 0.9rem; background: none; font-size: 0; color: var(--ink); }
+.colophon-seal::before { background: url("../assets/img/logo.png") center / contain no-repeat; box-shadow: none; filter: none; border-radius: 0; }
+.colophon-seal span { display: none; }

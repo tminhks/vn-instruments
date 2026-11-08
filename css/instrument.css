@@ -1,0 +1,156 @@
+/* Instrument page: the instrument drawn large on its own slip of paper, then its story. */
+
+.inst-page {
+  /* wood and string colours of the drawn instruments (illustration only, not interface colours) */
+  --wood: #a8703d;
+  --wood-dark: #5d3a1d;
+  --wood-deep: #3d2614;
+  --board: #d9a96f;
+  --inlay: #ecd2a3;
+  --steel: #6c727a;
+  --gourd: #c79a52;
+}
+
+.inst-back { margin: 0 0 1rem; }
+.inst-head { display: grid; gap: 0.75rem 3rem; align-items: end; margin-bottom: clamp(1.25rem, 3vw, 2rem); }
+@media (min-width: 900px) { .inst-head { grid-template-columns: minmax(0, 1fr) minmax(18rem, 30rem); } }
+.inst-head h1 { font-size: clamp(2.6rem, 7vw, 4rem); font-weight: 800; margin: 0; }
+.inst-gloss { margin: 0.2rem 0 0.2rem; font-size: 1.15rem; font-weight: 500; }
+.inst-gloss .say { color: var(--ink-soft); font-weight: 400; }
+.inst-head .inst-meta { margin: 0; }
+.inst-summary { margin: 0; font: 500 clamp(1.15rem, 1.8vw, 1.35rem)/1.5 var(--font-display); color: var(--ink); max-width: 34rem; }
+
+/* ---------- play area ---------- */
+.play-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; margin-bottom: 0.6rem; }
+.play-bar h2 { font-size: 1.6rem; font-weight: 800; margin: 0; }
+.play-tools { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.inst-listen { font-weight: 700; }
+.inst-listen .icon { fill: currentColor; stroke: none; }
+.inst-listen[aria-pressed="true"] { color: var(--vermilion-deep); }
+.inst-save[aria-pressed="true"] .star { fill: var(--vermilion); stroke: var(--vermilion); }
+.inst-save[aria-pressed="true"] { font-weight: 700; }
+
+.stage {
+  background: var(--card); border: 1px solid var(--line);
+  box-shadow: 0 22px 36px -30px rgba(14, 48, 41, 0.75);
+  padding: clamp(0.5rem, 2vw, 1.25rem);
+  user-select: none; -webkit-user-select: none;
+}
+.stage svg { display: block; width: 100%; height: auto; overflow: visible; }
+/* a downward sweep across the strings plucks them; sideways swipes still scroll on touch */
+.stage-tranh svg { touch-action: pan-x; }
+.stage-tranh svg.is-vertical { touch-action: pan-y; max-width: 420px; margin: 0 auto; }
+.stage-bau svg { touch-action: pan-y; }
+.stage-still { display: grid; place-items: center; padding-block: 2rem; }
+.stage-still .shape { width: min(100%, 560px); color: var(--ink); }
+
+/* đàn tranh */
+.tr-wood { fill: var(--wood); stroke: var(--wood-dark); stroke-width: 2; }
+.tr-board { fill: var(--board); }
+.tr-head { fill: var(--wood-dark); }
+.tr-carve { fill: none; stroke: var(--inlay); stroke-width: 1.6; }
+.tr-fixbridge { fill: none; stroke: var(--wood-deep); stroke-width: 6; stroke-linecap: round; }
+.tr-pegbox { fill: var(--wood-dark); }
+.tr-peg { fill: var(--wood-deep); }
+.tr-wire { fill: none; stroke: var(--steel); stroke-linecap: round; transition: stroke 0.25s; }
+.tr-wire.is-ringing { stroke: var(--vermilion); }
+.tr-bridge { fill: #f3e7cf; stroke: var(--wood-dark); stroke-width: 1.4; stroke-linejoin: round; }
+.tr-finger { fill: transparent; stroke: none; pointer-events: none; }
+.tr-finger.is-on { fill: rgba(184, 57, 42, 0.3); stroke: var(--vermilion); stroke-width: 1.5; }
+.tr-hit-pluck, .tr-hit-press { fill: none; stroke: transparent; stroke-width: 13; pointer-events: stroke; }
+.tr-hit-pluck { cursor: pointer; }
+.tr-hit-press { cursor: grab; }
+.tr-label { font: 600 13px var(--font-text); fill: var(--ink); pointer-events: none; }
+.tr-key { fill: var(--vermilion-deep); font-weight: 700; }
+
+/* đàn bầu */
+.b-front { fill: var(--wood); stroke: var(--wood-dark); stroke-width: 2; stroke-linejoin: round; }
+.b-top { fill: var(--board); stroke: var(--wood-dark); stroke-width: 1.5; stroke-linejoin: round; }
+.b-inlay { stroke: var(--inlay); stroke-width: 3; fill: none; }
+.b-end { fill: var(--wood-dark); }
+.b-peg { fill: var(--wood-deep); }
+.b-bridge { fill: none; stroke: var(--wood-deep); stroke-width: 3; }
+.b-wire { fill: none; stroke: var(--steel); stroke-width: 1.7; stroke-linecap: round; }
+.b-rod { fill: var(--wood-deep); }
+.b-gourd { fill: var(--gourd); stroke: var(--wood-dark); stroke-width: 1.6; }
+.b-gourd-line { fill: none; stroke: var(--wood-dark); stroke-width: 1.2; }
+.b-tie { fill: var(--wood-deep); }
+.b-rodhit { fill: none; stroke: transparent; stroke-width: 34; stroke-linecap: round; pointer-events: stroke; cursor: grab; }
+#b-rod { cursor: grab; }
+.is-dragging, .is-dragging #b-rod, .is-dragging .b-rodhit { cursor: grabbing; }
+.b-dot { fill: #f6ead2; stroke: var(--wood-dark); stroke-width: 1.5; }
+.b-ring { fill: none; stroke: var(--vermilion); stroke-width: 2.5; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.b-mark.is-on .b-ring { animation: ring 1.1s var(--ease-out); }
+@keyframes ring { from { opacity: 1; transform: scale(0.6); } to { opacity: 0; transform: scale(1.6); } }
+.b-label { font: 600 14px var(--font-text); fill: var(--ink); pointer-events: none; }
+.b-hit { fill: transparent; cursor: pointer; }
+@media (hover: hover) { .b-mark:hover .b-dot { fill: var(--vermilion); } }
+
+/* buttons that play the same notes (no drawing, no dragging needed) */
+.play-keys { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0.9rem 0 0.4rem; }
+.key-btn {
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center; min-width: 48px; min-height: 48px; padding: 0.25rem 0.55rem;
+  border: 1px solid var(--edge); border-radius: 4px; background: var(--card); color: var(--ink); font: 600 0.95rem/1.1 var(--font-text); cursor: pointer;
+}
+.key-btn small { font-size: 0.78rem; color: var(--vermilion-deep); font-weight: 700; }
+.key-btn:active { background: var(--ink); color: var(--cream); }
+@media (hover: hover) { .key-btn:hover { border-color: var(--ink); background: var(--card-hover); } }
+.rod-ctl { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.75rem; margin-left: auto; font-weight: 600; }
+.rod-ctl input { accent-color: var(--jade); width: 11rem; min-height: 44px; }
+.rod-ctl output { min-width: 7.5rem; font-weight: 500; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+
+.how { display: grid; gap: 0.3rem; margin: 0.5rem 0 0; color: var(--ink-soft); max-width: 62rem; }
+.how p { margin: 0; }
+.how b { color: var(--ink); }
+.how kbd, .no-sound kbd { background: var(--card); color: var(--ink); border: 1px solid var(--edge); border-radius: 3px; padding: 0 0.35rem; font: 600 0.85rem var(--font-text); box-shadow: none; }
+.no-sound { margin: 0.6rem 0 0; font-size: 0.92rem; color: var(--ink-soft); }
+
+/* ---------- reading ---------- */
+.inst-read { display: grid; gap: 1.5rem 3rem; margin-top: clamp(2rem, 4vw, 3rem); padding-top: clamp(1.5rem, 3vw, 2rem); border-top: 1px solid var(--line); }
+@media (min-width: 900px) { .inst-read { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.inst-read h2, .inst-next h2 { font-size: 1.6rem; font-weight: 800; margin: 0 0 0.6rem; }
+.inst-read p { max-width: 36rem; }
+.inst-read .detail-rows { margin-top: 0; padding-top: 0; border-top: 0; }
+
+.inst-next { display: grid; gap: 1.25rem 3rem; align-items: center; margin: clamp(2rem, 4vw, 3rem) 0; }
+@media (min-width: 900px) { .inst-next { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.next-lesson .ink-link { font-size: 1.25rem; }
+.next-lesson p { margin: 0.4rem 0 0; color: var(--ink-soft); }
+.next-phone { display: flex; gap: 1rem; align-items: center; }
+.next-phone img { width: 120px; height: 120px; padding: 8px; background: #fff; border: 1px solid var(--line); image-rendering: pixelated; flex: none; }
+.next-phone h2 { font-size: 1.3rem; margin-bottom: 0.3rem; }
+.next-phone p { margin: 0 0 0.4rem; color: var(--ink-soft); }
+@media (hover: none), (max-width: 767.98px) { .next-phone img { display: none; } }
+
+.still-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; margin-top: 0.8rem !important; }
+.inst-page .coming-note { margin-top: 1rem; max-width: 46rem; }
+
+/* Phones: the five marks sit about 10px apart on screen, too close to touch reliably and too small
+   to label, so the numbered buttons below the drawing carry the notes there. */
+@media (max-width: 639.98px) {
+  .b-label { display: none; }
+  .stage-bau { padding: 0.5rem 0.25rem; }
+  .rod-ctl { margin-left: 0; width: 100%; }
+  .rod-ctl input { flex: 1 1 8rem; width: auto; }
+}
+
+/* sáo trúc */
+.fl-tube { fill: #cdbb62; stroke: #6f5f22; stroke-width: 2; }
+.fl-shine { stroke: #efe3a0; stroke-width: 4; stroke-linecap: round; fill: none; opacity: .8; }
+.fl-node { stroke: #6f5f22; stroke-width: 5; fill: none; }
+.fl-blow { fill: #3d2f10; }
+.fl-tassel { stroke: var(--vermilion); stroke-width: 3; stroke-linecap: round; fill: none; }
+.fl-dark { fill: #3d2f10; }
+.fl-pad { fill: transparent; stroke: transparent; stroke-width: 2; }
+.fl-pad.is-on { fill: #e2b48a; stroke: #8a5a2e; }
+.fl-hit { fill: transparent; cursor: pointer; }
+.stage-flute svg { touch-action: manipulation; }
+.stage-flute svg.is-vertical { max-width: 150px; margin: 0 auto; }
+.blow-btn, .mic-btn { border: 1px solid var(--edge); background: var(--card); font-weight: 700; min-height: 48px; padding: 0 0.9rem; }
+.mic-btn { border-color: var(--ink); }
+.mic-btn[aria-pressed="true"] { background: var(--ink); color: var(--cream); }
+.blow-btn:active { background: var(--ink); color: var(--cream); }
+.breath { display: inline-flex; align-items: center; gap: 0.5rem; margin-left: auto; font-weight: 600; }
+.breath-bar { display: inline-block; width: 7rem; height: 10px; border: 1px solid var(--edge); background: var(--card); }
+.breath-bar > span { display: block; height: 100%; width: 0; background: var(--vermilion); }
+.fl-note { min-width: 3.2rem; font: 800 1.3rem var(--font-display); }
