@@ -162,3 +162,6 @@
 }
 .blow-btn, .mic-btn, .key-btn { touch-action: manipulation; }
 .blow-btn { touch-action: none; }
+
+.mic-sens { margin: 0.5rem 0 0; }
+.mic-info { font-size: 0.85rem; color: var(--ink-soft); min-height: 1.2em; }

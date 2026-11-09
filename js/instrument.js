@@ -57,6 +57,9 @@
     micInsecure: { en: "The microphone only works on a secure (https) page, and this page is not one. Use the Hold to blow button instead.", vi: "Micro chỉ dùng được trên trang bảo mật (https), mà trang này không phải. Hãy dùng nút Giữ để thổi." },
     micNone: { en: "No microphone was found on this device. Use the Hold to blow button instead.", vi: "Không tìm thấy micro trên thiết bị này. Hãy dùng nút Giữ để thổi." },
     micHow: { en: "To allow it: tap the lock or settings icon beside the page address, choose Permissions, set Microphone to Allow, then reload. If the page opened inside another app (a QR scanner, Zalo, Facebook), open it in Chrome or Safari instead.", vi: "Cách cho phép: chạm biểu tượng ổ khóa hoặc cài đặt cạnh địa chỉ trang, chọn Quyền, đặt Micro thành Cho phép, rồi tải lại trang. Nếu trang đang mở trong một ứng dụng khác (trình quét QR, Zalo, Facebook), hãy mở bằng Chrome hoặc Safari." },
+    sens: { en: "Microphone sensitivity", vi: "Độ nhạy micro" },
+    micInfo: { en: "Microphone: {label} · level {lvl} {state}", vi: "Micro: {label} · mức {lvl} {state}" },
+    micMuted: { en: "· the device reports it as muted", vi: "· thiết bị báo micro đang tắt tiếng" },
     micWaiting: { en: "Waiting for your answer to the microphone question…", vi: "Đang chờ bạn trả lời câu hỏi cho phép micro…" },
     micOther: { en: "The microphone could not start ({why}). Use the Hold to blow button instead.", vi: "Không bật được micro ({why}). Hãy dùng nút Giữ để thổi." },
     micTip: { en: "Use headphones: the flute sound can otherwise leak back into the microphone.", vi: "Nên đeo tai nghe: nếu không, tiếng sáo có thể lọt ngược vào micro." },
@@ -527,17 +530,27 @@
       var src = ctx.createMediaStreamSource(stream), an = ctx.createAnalyser(), hp = ctx.createBiquadFilter();
       hp.type = "highpass"; hp.frequency.value = 120; an.fftSize = 1024;
       src.connect(hp); hp.connect(an);                       // the microphone is never routed to the speakers
-      var data = new Float32Array(an.fftSize), floor = 0.01, frames = 0, smooth = 0;
+      var data = new Float32Array(an.fftSize), floor = -1, peak = 0.04, smooth = 0, frame = 0;
+      var track = stream.getAudioTracks()[0], info = document.getElementById("mic-info");
       mic = { stream: stream, src: src, raf: 0 };
       (function read() {
         an.getFloatTimeDomainData(data);
         var sum = 0;
         for (var i = 0; i < data.length; i++) sum += data[i] * data[i];
         var rms = Math.sqrt(sum / data.length);
-        if (frames < 30) { floor = Math.max(floor, rms * 1.6); frames++; }     // first half second: learn the room noise
-        var raw = Math.max(0, (rms - floor * 1.8) / 0.12);
-        smooth += (raw - smooth) * (raw > smooth ? 0.5 : 0.18);
+        // The room noise is the quietest the microphone has been lately; it creeps up very slowly,
+        // so it is never learned from a breath. The loudest recent breath sets the scale, so a quiet
+        // laptop microphone and a loud phone microphone both fill the meter.
+        if (floor < 0 || rms < floor) floor = rms; else floor += (rms - floor) * 0.0004;
+        peak = Math.max(rms, peak * 0.997, 0.03);
+        var sens = +(document.getElementById("mic-sens") || { value: 2.5 }).value;
+        var base = floor * 1.5 + 0.003;
+        var raw = Math.max(0, (rms - base) / Math.max(0.02, peak - base)) * sens * 0.5;
+        smooth += (raw - smooth) * (raw > smooth ? 0.5 : 0.15);
         breath.mic = Math.min(1.2, smooth);
+        if (info && ++frame % 8 === 0) {
+          info.textContent = fill(t(UI.micInfo), { label: (track && track.label) || "?", lvl: rms.toFixed(3), state: track && track.muted ? t(UI.micMuted) : "" });
+        }
         mic.raf = requestAnimationFrame(read);
       })();
       var btn = document.getElementById("mic-btn");
@@ -590,7 +603,8 @@
         '<button type="button" class="act mic-btn" id="mic-btn" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-sound-on"/></svg><span>' + t(UI.micOn) + "</span></button>" +
         '<div class="breath"><span>' + t(UI.breath) + '</span><span class="breath-bar" aria-hidden="true"><span id="fl-meter"></span></span><output class="fl-note" id="fl-note">' + fluteNote().n + "</output></div>" +
         "</div>" +
-        '<p class="how" id="mic-note" aria-live="polite"></p>' +
+        '<label class="rod-ctl mic-sens"><span>' + t(UI.sens) + '</span><input type="range" id="mic-sens" min="1" max="6" step="0.5" value="2.5"></label>' +
+        '<p class="how" id="mic-note" aria-live="polite"></p><p class="how mic-info" id="mic-info" aria-hidden="true"></p>' +
         '<div class="how"><p>' + t(UI.fluteHowMouse) + "</p><p>" + t(UI.fluteHowKeys) + "</p></div>";
     }
     // instruments that cannot be played yet
