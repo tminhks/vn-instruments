@@ -99,7 +99,6 @@
       lfo.connect(depth);
       oscs.forEach(function (o) { depth.connect(o.detune); });
       lfo.start(t); lfo.stop(t + dur);
-      oscs.push(lfo);
     }
     oscs.forEach(function (o) { o.start(t); o.stop(t + dur + 0.05); });
     return oscs;
