@@ -42,8 +42,8 @@
     drawing: { en: "Outline drawing of the {name}.", vi: "Hình vẽ nét của {name}." },
 
     // sáo trúc
-    fluteHowMouse: { en: "<b>Cover</b>: tap a hole to cover it, tap again to lift the finger. <b>Blow</b>: on a phone, press <i>Blow into the microphone</i> and blow across the bottom edge of the phone. On a computer, hold <i>Hold to blow</i>.", vi: "<b>Bịt lỗ</b>: chạm vào lỗ để bịt, chạm lần nữa để nhấc ngón. <b>Thổi</b>: trên điện thoại, bấm <i>Thổi vào micro</i> rồi thổi vào cạnh dưới điện thoại. Trên máy tính, giữ nút <i>Giữ để thổi</i>." },
-    fluteHowKeys: { en: "<b>Keys</b>: <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> cover the six holes from the mouth end. Hold <kbd>Space</kbd> to blow. Blow harder for the higher octave.", vi: "<b>Bàn phím</b>: <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> bịt sáu lỗ từ đầu thổi. Giữ <kbd>Dấu cách</kbd> để thổi. Thổi mạnh hơn thì lên quãng tám." },
+    fluteHowMouse: { en: "<b>Fingers</b>: every hole starts covered. Tap a hole to lift your finger, tap again to cover it. Or press and hold a hole to cover it only while you hold it (several fingers at once work on a phone). <b>Blow</b>: on a phone, press <i>Blow into the microphone</i> and blow across the bottom edge of the phone. On a computer, hold <i>Hold to blow</i>.", vi: "<b>Ngón tay</b>: lúc đầu mọi lỗ đều đang bịt. Chạm vào lỗ để nhấc ngón, chạm lần nữa để bịt lại. Hoặc chạm giữ một lỗ để chỉ bịt khi còn giữ (trên điện thoại dùng được nhiều ngón cùng lúc). <b>Thổi</b>: trên điện thoại, bấm <i>Thổi vào micro</i> rồi thổi vào cạnh dưới điện thoại. Trên máy tính, giữ nút <i>Giữ để thổi</i>." },
+    fluteHowKeys: { en: "<b>Keys</b>: <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> are holes 1 to 6, counted from the mouth end. Tap a key to flip a hole, hold it to cover only while held. Hold <kbd>Space</kbd> to blow. Blow harder for the higher octave.", vi: "<b>Bàn phím</b>: <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> là lỗ 1 đến 6, đếm từ đầu thổi. Nhấn nhanh một phím để đổi lỗ, giữ phím để chỉ bịt khi còn giữ. Giữ <kbd>Dấu cách</kbd> để thổi. Thổi mạnh hơn thì lên quãng tám." },
     fluteLabel: { en: "Bamboo flute held sideways with a blowing hole and six finger holes. Tap a hole to cover it, then blow.", vi: "Sáo trúc cầm ngang, có một lỗ thổi và sáu lỗ bấm. Chạm vào lỗ để bịt, rồi thổi." },
     holeBtn: { en: "Hole {n}: {state}", vi: "Lỗ {n}: {state}" },
     covered: { en: "covered", vi: "đang bịt" },
@@ -65,6 +65,14 @@
     micTip: { en: "Use headphones: the flute sound can otherwise leak back into the microphone.", vi: "Nên đeo tai nghe: nếu không, tiếng sáo có thể lọt ngược vào micro." },
     micReady: { en: "Listening. Blow across the bottom edge of the phone.", vi: "Đang nghe. Hãy thổi vào cạnh dưới của điện thoại." },
     breath: { en: "Breath", vi: "Hơi thổi" },
+    nowNote: { en: "Note now", vi: "Nốt đang phát" },
+    holeCovered: { en: "covered", vi: "bịt" },
+    holeOpen: { en: "open", vi: "mở" },
+    decides: { en: "sets the note", vi: "quyết định nốt" },
+    hintStart: { en: "Try this: all holes are covered, so you hear the lowest note, {note}. Lift your finger from hole 6, the one farthest from your mouth. The note rises a step.", vi: "Thử thế này: mọi lỗ đang bịt nên bạn nghe nốt thấp nhất, {note}. Hãy nhấc ngón khỏi lỗ 6, lỗ xa đầu thổi nhất. Nốt sẽ lên một bậc." },
+    hintStep: { en: "Hole {n} is the first open hole from the mouth end, so the note is {note}. Lift hole {next} for a higher note, or cover holes again to come back down.", vi: "Lỗ {n} là lỗ mở đầu tiên tính từ đầu thổi, nên nốt là {note}. Nhấc lỗ {next} để lên cao hơn, hoặc bịt lại để xuống thấp." },
+    hintTop: { en: "Hole 1, nearest your mouth, is open: this is the highest note, {note}. Holes below it no longer change the note. Cover hole 1 to come down.", vi: "Lỗ 1, gần đầu thổi nhất, đang mở: đây là nốt cao nhất, {note}. Các lỗ phía sau không còn đổi nốt. Bịt lỗ 1 để xuống." },
+    hintOther: { en: "On a flute the open hole nearest your mouth sets the note, and the holes beyond it hardly matter. Cover all the holes and lift them one by one, farthest first.", vi: "Trên sáo, lỗ mở gần đầu thổi nhất quyết định nốt, các lỗ phía sau gần như không đổi gì. Hãy bịt hết rồi nhấc từng ngón, bắt đầu từ lỗ xa nhất." },
 
     // đàn tranh
     tranhHowMouse: { en: "<b>Pluck</b>: click a string to the right of its bridge, or sweep across several strings. <b>Bend</b>: right after plucking, press the same string to the left of its bridge and hold.", vi: "<b>Gảy</b>: bấm vào dây ở bên phải con nhạn, hoặc vuốt qua nhiều dây. <b>Nhấn luyến</b>: vừa gảy xong, nhấn giữ chính dây đó ở bên trái con nhạn." },
@@ -420,28 +428,62 @@
       o += '<g class="fl-hole" data-hole="' + k + '">' +
         '<circle class="fl-pad" id="fp' + k + '" cx="' + x + '" cy="101" r="23"/>' +
         '<circle class="fl-dark" cx="' + x + '" cy="101" r="10"/>' +
-        '<text class="tr-label" x="' + x + '" y="162" text-anchor="middle"><tspan class="tr-key">' + FL_KEYS[k] + "</tspan></text>" +
+        '<circle class="fl-pivot" id="fr' + k + '" cx="' + x + '" cy="101" r="33"/>' +
+        '<text class="tr-label" x="' + x + '" y="156" text-anchor="middle"><tspan class="tr-key">' + FL_KEYS[k] + "</tspan> " + (k + 1) + "</text>" +
+        '<text class="fl-state" id="fs' + k + '" x="' + x + '" y="178" text-anchor="middle"></text>' +
         '<circle class="fl-hit" data-hole="' + k + '" cx="' + x + '" cy="101" r="38"/></g>';
     });
     var g = vert ? '<g transform="translate(' + FH + ' 0) rotate(90)">' + o + "</g>" : "<g>" + o + "</g>";
     return '<svg class="flute ' + (vert ? "is-vertical" : "") + '" viewBox="0 0 ' + (vert ? FH + " " + FW : FW + " " + FH) + '" role="img" aria-label="' + esc(t(UI.fluteLabel)) + '">' + g + "</svg>";
   }
+  function firstOpenHole() {
+    for (var i = 0; i < 6; i++) if (!covered[i]) return i;
+    return -1;
+  }
   function paintHoles() {
+    var pivot = firstOpenHole(), note = fluteNote();
     covered.forEach(function (c, k) {
       var p = document.getElementById("fp" + k), b = document.querySelector('[data-key-hole="' + k + '"]');
+      var st = document.getElementById("fs" + k), ring = document.getElementById("fr" + k);
       if (p) p.classList.toggle("is-on", c);
+      if (st) st.textContent = c ? t(UI.holeCovered) : t(UI.holeOpen);
+      if (st) st.classList.toggle("is-open", !c);
+      if (ring) ring.classList.toggle("is-on", k === pivot);
       if (b) {
         b.setAttribute("aria-pressed", String(c));
-        b.setAttribute("aria-label", fill(t(UI.holeBtn), { n: k + 1, state: t(c ? UI.covered : UI.open) }));
+        b.setAttribute("aria-label", fill(t(UI.holeBtn), { n: k + 1, state: t(c ? UI.covered : UI.open) }) + (k === pivot ? ", " + t(UI.decides) : ""));
       }
     });
-    var n = document.getElementById("fl-note");
-    if (n) n.textContent = fluteNote().n;
+    ["fl-note", "fl-big"].forEach(function (id) { var n = document.getElementById(id); if (n) n.textContent = note.n; });
+    var h = document.getElementById("fl-hint");
+    if (h) {
+      // the exercise: all covered, then lift from the far end towards the mouth
+      var open = 0;
+      for (var j = 5; j >= 0 && !covered[j]; j--) open++;
+      var contiguous = covered.every(function (c, k) { return k >= 6 - open ? !c : c; });
+      var msg;
+      if (open === 0 && covered.every(Boolean)) msg = fill(t(UI.hintStart), { note: note.n });
+      else if (!contiguous) msg = t(UI.hintOther);
+      else if (open === 6) msg = fill(t(UI.hintTop), { note: note.n });
+      else msg = fill(t(UI.hintStep), { n: 6 - open + 1, note: note.n, next: 6 - open });
+      h.textContent = msg;
+    }
   }
-  function toggleHole(k) {
-    covered[k] = !covered[k];
+  // A quick tap flips a hole and leaves it; holding a finger down covers the hole only while it is held.
+  var holdSince = {};
+  function holePress(k, id) {
+    holdSince[id] = { k: k, t: performance.now(), was: covered[k] };
+    covered[k] = true;                                   // a finger going down always covers the hole
     paintHoles();
     say(fluteNote().n);
+  }
+  function holeRelease(id) {
+    var h = holdSince[id];
+    if (!h) return;
+    delete holdSince[id];
+    // held for a moment: the finger lifts and the hole goes back as it was; a quick tap flips the hole and leaves it
+    covered[h.k] = performance.now() - h.t > 350 ? h.was : !h.was;
+    paintHoles(); say(fluteNote().n);
   }
 
   // The voice: a soft breathy flute tone. Pitch follows the fingering, loudness follows the breath.
@@ -594,7 +636,9 @@
         '<div class="how"><p>' + t(UI.bauHowMouse) + "</p><p>" + t(UI.bauHowKeys) + "</p></div>";
     }
     if (inst.id === "sao-truc") {
-      return '<div class="stage stage-flute" id="stage">' + fluteSVG(vertical) + "</div>" +
+      return '<p class="fl-readout" aria-hidden="true"><span>' + t(UI.nowNote) + '</span><b id="fl-big">' + fluteNote().n + "</b></p>" +
+        '<div class="stage stage-flute" id="stage">' + fluteSVG(vertical) + "</div>" +
+        '<p class="fl-hint" id="fl-hint" aria-live="polite"></p>' +
         '<div class="play-keys" role="group" aria-label="' + esc(t(UI.playTitle)) + '">' +
         FL_KEYS.map(function (k, n) {
           return '<button type="button" class="key-btn" data-key-hole="' + n + '" aria-pressed="true" aria-label="' + esc(fill(t(UI.holeBtn), { n: n + 1, state: t(UI.covered) })) + '"><span>' + (n + 1) + "</span><small>" + k + "</small></button>";
@@ -772,7 +816,7 @@
       if (n !== -1 && !e.repeat) { pluckTranh(n); e.preventDefault(); }
     } else if (inst.id === "sao-truc") {
       var h = FL_KEYS.indexOf(k);
-      if (h !== -1 && !e.repeat) { toggleHole(h); e.preventDefault(); }
+      if (h !== -1 && !e.repeat) { holePress(h, "key" + h); e.preventDefault(); }
       else if (e.key === " " && !e.target.closest("button, a")) { e.preventDefault(); if (!e.repeat) { breath.key = 0.55; ensureFlute(); } }
     } else if (inst.id === "dan-bau") {
       if (/^[1-5]$/.test(e.key) && !e.repeat) { pluckBau(MARKS[+e.key - 1]); e.preventDefault(); }
@@ -796,6 +840,7 @@
     if (!inst) return;
     if (inst.id === "dan-tranh" && e.key === "Shift" && pressing !== null) pressTranh(pressing, false);
     if (inst.id === "sao-truc" && e.key === " ") breath.key = 0;
+    if (inst.id === "sao-truc") { var kk = FL_KEYS.indexOf(e.key.length === 1 ? e.key.toUpperCase() : e.key); if (kk !== -1) holeRelease("key" + kk); }
     if (inst.id === "dan-bau" && (e.key === "ArrowUp" || e.key === "ArrowDown")) { keysDown[e.key] = false; springBack(); }
   }
 
@@ -807,8 +852,16 @@
     if (svg && inst.id === "sao-truc") {
       svg.addEventListener("pointerdown", function (e) {
         var el = e.target.closest ? e.target.closest("[data-hole]") : null;
-        if (el) { toggleHole(+el.getAttribute("data-hole")); e.preventDefault(); }
+        if (el) {
+          var k = +el.getAttribute("data-hole");
+          holePress(k, "p" + e.pointerId);
+          try { svg.setPointerCapture(e.pointerId); } catch (err) { /* touch already released */ }
+          e.preventDefault();
+        }
       });
+      var drop = function (e) { holeRelease("p" + e.pointerId); };
+      svg.addEventListener("pointerup", drop);
+      svg.addEventListener("pointercancel", drop);
     }
     var blow = document.getElementById("blow-btn");
     if (blow) {
@@ -847,7 +900,7 @@
         say((now ? t(UI.saved) : t(UI.save)) + " " + inst.vi);
       } else if (b.id === "inst-listen") demo();
       else if (b.id === "mic-btn") { if (mic) stopMic(); else startMic(); }
-      else if (b.hasAttribute("data-key-hole")) toggleHole(+b.getAttribute("data-key-hole"));
+      else if (b.hasAttribute("data-key-hole")) { var hk = +b.getAttribute("data-key-hole"); covered[hk] = !covered[hk]; paintHoles(); say(fluteNote().n); }
       else if (b.hasAttribute("data-key-pluck")) pluckTranh(+b.getAttribute("data-key-pluck"));
       else if (b.hasAttribute("data-key-mark")) pluckBau(+b.getAttribute("data-key-mark"));
     });

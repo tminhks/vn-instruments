@@ -165,3 +165,12 @@
 
 .mic-sens { margin: 0.5rem 0 0; }
 .mic-info { font-size: 0.85rem; color: var(--ink-soft); min-height: 1.2em; }
+
+/* sáo trúc: what each finger does must be visible without guessing */
+.fl-readout { display: flex; align-items: baseline; gap: 0.6rem; margin: 0 0 0.4rem; font-weight: 600; color: var(--ink-soft); }
+.fl-readout b { font: 800 clamp(2.4rem, 6vw, 3.4rem)/1 var(--font-display); color: var(--ink); min-width: 5.5rem; }
+.fl-state { font: 700 15px var(--font-text); fill: var(--ink-soft); pointer-events: none; }
+.fl-state.is-open { fill: var(--vermilion-deep); }
+.fl-pivot { fill: none; stroke: var(--vermilion); stroke-width: 3.5; opacity: 0; pointer-events: none; }
+.fl-pivot.is-on { opacity: 1; }
+.fl-hint { margin: 0.7rem 0 0; padding: 0.6rem 0.9rem; background: var(--card); border: 1px dashed var(--edge); color: var(--ink); font-weight: 500; max-width: 46rem; }
