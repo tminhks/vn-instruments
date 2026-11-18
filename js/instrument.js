@@ -249,7 +249,7 @@
     var s = TRANH[n], x = XP + 46, y = yAt(n, XP) + 4;
     var rot = vertical ? ' transform="rotate(-90 ' + x + " " + (y - 4) + ')"' : "";
     return '<text class="tr-label" x="' + x + '" y="' + y.toFixed(1) + '"' + rot + ' text-anchor="' + (vertical ? "middle" : "start") + '">' +
-      '<tspan class="tr-key">' + s.key + "</tspan> " + s.tone.vi + "</text>";
+      '<tspan class="tr-key">' + s.key + "</tspan> " + s.tone.vi + ' <tspan class="tr-west">' + s.west + "</tspan></text>";
   }
   // The string, with its vibrating part (bridge to right bridge) bowed by `off`
   // and the left part pulled down by `press` where the left hand presses.

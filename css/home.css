@@ -325,3 +325,11 @@ html.is-cover .cover-meaning { animation: cover-ink 0.55s var(--ease-out) 0.7s b
 html.is-cover .cover-sub { animation: cover-ink 0.55s var(--ease-out) 0.8s both; }
 html.is-cover .btn-begin { animation: cover-ink 0.55s var(--ease-out) 0.9s both; }
 html.is-cover .cover-hint { animation: cover-ink 0.55s var(--ease-out) 1s both; }
+
+/* Navigation targets: at least 44 px, and a visible focus ring on the menu button (Bootstrap removes it). */
+.brand { min-height: 44px; }
+.site-nav .nav-link { min-height: 44px; }
+.lang-switch { height: 44px; }
+.lang-switch button { min-height: 44px; min-width: 44px; }
+.tool-btn { min-height: 44px; }
+.navbar-toggler:focus-visible { outline: 3px solid var(--jade); outline-offset: 3px; }

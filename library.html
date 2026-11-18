@@ -64,7 +64,7 @@
           </li>
         </ul>
         <div class="nav-tools">
-          <button class="tool-btn" id="sound-toggle" type="button" aria-pressed="true" aria-label="Sound" data-vi-label="Âm thanh">
+          <button class="tool-btn" id="sound-toggle" type="button" aria-pressed="true">
             <svg class="icon on" aria-hidden="true"><use href="#i-sound-on"/></svg>
             <svg class="icon off" aria-hidden="true"><use href="#i-sound-off"/></svg>
             <span class="on" data-vi="Có tiếng">Sound on</span><span class="off" data-vi="Tắt tiếng">Sound off</span>
@@ -146,8 +146,9 @@
     <div class="results-bar">
       <h2 id="results-title" class="visually-hidden" data-vi="Danh sách nhạc cụ">Instrument list</h2>
       <p class="count" id="lib-count" tabindex="-1"></p>
-      <button type="button" class="text-btn" id="lib-reset" hidden data-vi="Bỏ hết bộ lọc">Clear all filters</button>
+      <button type="button" class="text-btn" id="lib-reset" hidden>Clear all filters</button>
     </div>
+    <p class="photo-note" data-vi="Trong bản prototype, hình vẽ nét thay cho ảnh thật của các nhạc cụ chưa có ảnh.">In this prototype, outline drawings stand in for the photographs we do not have yet.</p>
     <ul class="inst-grid" id="lib-grid"></ul>
     <noscript><p class="lib-empty" data-vi="Trang này cần JavaScript để hiện danh sách nhạc cụ. Hãy bật JavaScript rồi tải lại trang.">This page needs JavaScript to list the instruments. Turn JavaScript on and reload the page.</p></noscript>
     <div class="lib-empty" id="lib-empty" hidden>

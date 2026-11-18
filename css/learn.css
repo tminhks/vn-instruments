@@ -13,6 +13,7 @@
 .ln .lede { font-size: 1.25rem; color: var(--ink-soft); margin: 0 0 1.6rem; max-width: 38rem; }
 .ln-for { margin: 0; color: var(--ink-soft); }
 .ln-crumb { margin-bottom: 1rem; }
+.ln-crumb .ink-link { min-height: 44px; align-items: center; }
 .idf-error-like { margin: 0 0 1rem; padding: 0.7rem 0.9rem; background: #f6e8cf; border: 1px solid var(--ochre); color: #5c3f0b; font-weight: 500; }
 
 /* ---------- buttons ---------- */
@@ -115,3 +116,11 @@
 .learned { margin: 0 0 0.6rem; padding-left: 1.2rem; display: grid; gap: 0.3rem; font-size: 1.15rem; }
 
 @media (prefers-reduced-motion: reduce) { .zs.is-sounding .zline { animation: none; } .bau-string { transition: none; } }
+
+/* Navigation targets: at least 44 px, and a visible focus ring on the menu button (Bootstrap removes it). */
+.brand { min-height: 44px; }
+.site-nav .nav-link { min-height: 44px; }
+.lang-switch { height: 44px; }
+.lang-switch button { min-height: 44px; min-width: 44px; }
+.tool-btn { min-height: 44px; }
+.navbar-toggler:focus-visible { outline: 3px solid var(--jade); outline-offset: 3px; }

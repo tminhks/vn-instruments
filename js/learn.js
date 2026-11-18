@@ -14,6 +14,7 @@
     title: { en: "Learn", vi: "Bài học" },
     lede: { en: "Short lessons, about three minutes each. Play along and the page tells you when you get it right.", vi: "Bài học ngắn, khoảng ba phút mỗi bài. Bạn chơi theo, trang sẽ báo khi bạn chơi đúng." },
     allLessons: { en: "All lessons", vi: "Tất cả bài học" },
+    crumb: { en: "You are here", vi: "Bạn đang ở đây" },
     steps: { en: "{n} steps", vi: "{n} bước" },
     mins: { en: "{n} min", vi: "{n} phút" },
     notStarted: { en: "Not started", vi: "Chưa bắt đầu" },
@@ -285,7 +286,7 @@
     var muted = S && S.isMuted() ? '<p class="idf-error-like">' + esc(t(UI.muted)) + "</p>" : "";
     var board = L.id === "dan-bau" ? bauBoard(def) : zitherBoard(def);
     var last = state.step === total - 1;
-    return '<nav class="ln-crumb"><a class="ink-link" href="learn.html"><span>' + esc(t(UI.allLessons)) + '</span></a></nav>' +
+    return '<nav class="ln-crumb" aria-label="' + esc(t(UI.crumb)) + '"><a class="ink-link" href="learn.html"><span>' + esc(t(UI.allLessons)) + '</span></a></nav>' +
       '<header class="ln-head">' + sealHtml(i) + '<div><h1>' + esc(t(L.title)) + '</h1><p class="ln-for" lang="vi">' + esc(cap(i.vi)) + "</p></div></header>" +
       '<div class="stepper"><p class="step-count">' + esc(fill(t(UI.stepOf), { n: state.step + 1, m: total })) + '</p><ol class="segs" aria-label="' + esc(t(UI.progressLabel)) + '">' + segs + "</ol></div>" +
       '<section class="step"><h2 id="ln-step-title" tabindex="-1">' + esc(t(def.title)) + "</h2><p>" + esc(t(def.text)) + "</p></section>" + muted + board + fb +
@@ -298,7 +299,7 @@
   function doneView(L, i) {
     var idx = LESSONS.indexOf(L), nxt = LESSONS[idx + 1];
     var learned = L.learned.map(function (x) { return "<li>" + esc(t(x)) + "</li>"; }).join("");
-    return '<nav class="ln-crumb"><a class="ink-link" href="learn.html"><span>' + esc(t(UI.allLessons)) + "</span></a></nav>" +
+    return '<nav class="ln-crumb" aria-label="' + esc(t(UI.crumb)) + '"><a class="ink-link" href="learn.html"><span>' + esc(t(UI.allLessons)) + "</span></a></nav>" +
       '<section class="finish">' + sealHtml(i) + '<h1 id="ln-step-title" tabindex="-1">' + esc(t(UI.doneT)) + '</h1><p class="ln-for">' + esc(t(L.title)) + "</p>" +
       '<h2>' + esc(t(UI.learnedT)) + '</h2><ul class="learned">' + learned + "</ul>" +
       '<div class="btn-row"><a class="ln-btn primary" href="instrument.html?id=' + L.id + '">' + esc(t(UI.playIt)) + "</a>" +

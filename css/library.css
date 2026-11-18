@@ -1,5 +1,5 @@
 :root {
-  --card: #f7f8ee;                       /* a printed slip lying on the paper */
+  --card: #f8f1e2;                       /* a printed slip lying on the paper */
   --card-hover: #fff;
   --wash: rgba(18, 59, 51, 0.07);        /* faint ink tint: wells, hovers, outline fills */
   --wash-soft: rgba(18, 59, 51, 0.05);
@@ -66,7 +66,7 @@ button.ink-link { border: 0; padding: 0 0 0.15rem; cursor: pointer; font: inheri
   .lib-tools { gap: 0.75rem; padding-block: 1rem; }
   .filter-toggle {
     display: inline-flex; align-items: center; gap: 0.5rem; justify-self: start; min-height: 44px; padding: 0.4rem 1rem;
-    border: 1px solid var(--edge); border-radius: 4px; background: rgba(247, 248, 238, 0.7);
+    border: 1px solid var(--edge); border-radius: 3px; background: rgba(247, 248, 238, 0.7);
     color: var(--ink); font: 700 1rem var(--font-text); cursor: pointer;
   }
   .filter-toggle[aria-expanded="true"] { background: var(--ink); border-color: var(--ink); color: var(--cream); }
@@ -83,7 +83,7 @@ button.ink-link { border: 0; padding: 0 0 0.15rem; cursor: pointer; font: inheri
 @media (max-width: 639.98px), (max-height: 520px) and (pointer: coarse) {
   .lib-tools.is-open .filter-apply {
     display: inline-flex; justify-content: center; align-items: center; min-height: 48px; padding: 0.5rem 1.2rem;
-    border: 0; border-radius: 4px; background: var(--ink); color: var(--cream); font: 700 1.02rem var(--font-text); cursor: pointer;
+    border: 0; border-radius: 3px; background: var(--ink); color: var(--cream); font: 700 1.02rem var(--font-text); cursor: pointer;
   }
   .filter-apply:disabled { background: var(--wash); color: var(--ink-soft); cursor: default; }
 }
@@ -92,9 +92,9 @@ button.ink-link { border: 0; padding: 0 0 0.15rem; cursor: pointer; font: inheri
 .chips legend { float: left; width: 100%; padding: 0; }
 .search-box {
   display: flex; align-items: center; gap: 0.5rem; min-height: 48px; padding: 0 0.85rem;
-  background: rgba(247, 248, 238, 0.9); border: 1px solid rgba(18, 59, 51, 0.45); border-radius: 4px;
+  background: rgba(247, 248, 238, 0.9); border: 1px solid rgba(18, 59, 51, 0.45); border-radius: 3px;
 }
-.search-box:focus-within { border-color: var(--jade); box-shadow: 0 0 0 3px rgba(31, 122, 100, 0.25); }
+.search-box:focus-within { border-color: var(--jade); box-shadow: 0 0 0 3px rgba(23, 101, 79, 0.25); }
 .search-box .icon { color: var(--ink-soft); }
 .search-box input { flex: 1; min-width: 0; border: 0; background: none; font: inherit; color: var(--ink); padding: 0.55rem 0; outline: none; }
 .search-box input::placeholder { color: #52716a; }
@@ -103,7 +103,7 @@ button.ink-link { border: 0; padding: 0 0 0.15rem; cursor: pointer; font: inheri
 .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0; padding: 0; border: 0; min-width: 0; }
 .chip {
   display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; padding: 0.4rem 0.95rem;
-  border: 1px solid var(--edge); border-radius: 4px; background: rgba(247, 248, 238, 0.7);
+  border: 1px solid var(--edge); border-radius: 3px; background: rgba(247, 248, 238, 0.7);
   color: var(--ink); font: 500 1rem var(--font-text); cursor: pointer;
   transition: background-color 0.12s, color 0.12s, border-color 0.12s;
 }
@@ -195,8 +195,8 @@ button.ink-link { border: 0; padding: 0 0 0.15rem; cursor: pointer; font: inheri
 .compare-pick { display: grid; gap: 0.75rem 1.25rem; margin: 1.25rem 0 1.5rem; max-width: 40rem; }
 @media (min-width: 640px) { .compare-pick { grid-template-columns: 1fr 1fr; } }
 .compare-pick label { font-weight: 700; margin-bottom: 0.35rem; display: block; }
-.compare-pick .form-select { min-height: 48px; border-radius: 4px; border-color: rgba(18, 59, 51, 0.45); background-color: rgba(247, 248, 238, 0.9); color: var(--ink); font: inherit; }
-.compare-pick .form-select:focus { border-color: var(--jade); box-shadow: 0 0 0 3px rgba(31, 122, 100, 0.25); }
+.compare-pick .form-select { min-height: 48px; border-radius: 3px; border-color: rgba(18, 59, 51, 0.45); background-color: rgba(247, 248, 238, 0.9); color: var(--ink); font: inherit; }
+.compare-pick .form-select:focus { border-color: var(--jade); box-shadow: 0 0 0 3px rgba(23, 101, 79, 0.25); }
 
 .compare-table { overflow-x: auto; }
 .compare-table table { width: 100%; min-width: 34rem; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); }
@@ -254,7 +254,7 @@ button.ink-link { border: 0; padding: 0 0 0.15rem; cursor: pointer; font: inheri
 .tray-hint { margin: 0; flex: 1 1 12rem; font-size: 0.95rem; color: #bcd5ca; }
 .tray-go {
   margin-left: auto; display: inline-flex; align-items: center; gap: 0.5rem; min-height: 48px; padding: 0.55rem 1.2rem;
-  border: 0; border-radius: 4px; background: var(--cream); color: var(--ink); font: 700 1.02rem var(--font-text); cursor: pointer;
+  border: 0; border-radius: 3px; background: var(--cream); color: var(--ink); font: 700 1.02rem var(--font-text); cursor: pointer;
   box-shadow: inset 0 0 0 3px var(--cream), inset 0 0 0 4px rgba(18, 59, 51, 0.3);
 }
 .tray-go:hover { background: var(--card-hover); box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 4px rgba(18, 59, 51, 0.3); }
@@ -281,7 +281,7 @@ body.has-tray { padding-bottom: 5.5rem; }
 .detail-close {
   position: sticky; top: 0.5rem; z-index: 2; display: grid; place-items: center;
   width: 44px; height: 44px; margin: 0.3rem 0.3rem -47px auto;
-  border: 1px solid var(--line); border-radius: 4px; background: var(--card); color: var(--ink); cursor: pointer;
+  border: 1px solid var(--line); border-radius: 3px; background: var(--card); color: var(--ink); cursor: pointer;
   box-shadow: 0 8px 16px -12px rgba(14, 48, 41, 0.6);
 }
 .detail-close:hover { background: var(--card-hover); }
@@ -310,3 +310,11 @@ body.has-tray { padding-bottom: 5.5rem; }
 }
 .count:focus { outline: none; }
 .inst-visual.has-shape, .detail-visual.has-shape { background: none; border-bottom: 1px solid var(--line); }
+
+/* Shared navigation, brought up to 44px targets and a visible focus ring on this page. */
+.brand, .site-nav .nav-link, .tool-btn { min-height: 44px; }
+.lang-switch { height: 44px; }
+.lang-switch button { min-height: 44px; min-width: 44px; }
+.navbar-toggler:focus-visible { outline: 3px solid var(--jade); outline-offset: 3px; }
+
+.photo-note { margin: 0 0 0.9rem; font-size: 0.95rem; color: var(--ink-soft); }

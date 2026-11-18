@@ -60,7 +60,7 @@
 .tr-hit-pluck, .tr-hit-press { fill: none; stroke: transparent; stroke-width: 13; pointer-events: stroke; }
 .tr-hit-pluck { cursor: pointer; }
 .tr-hit-press { cursor: grab; }
-.tr-label { font: 600 13px var(--font-text); fill: var(--ink); pointer-events: none; }
+.tr-label { font: 700 13px var(--font-text); fill: var(--ink); pointer-events: none; }
 .tr-key { fill: var(--vermilion-deep); font-weight: 700; }
 
 /* đàn bầu */
@@ -82,7 +82,7 @@
 .b-ring { fill: none; stroke: var(--vermilion); stroke-width: 2.5; opacity: 0; transform-box: fill-box; transform-origin: center; }
 .b-mark.is-on .b-ring { animation: ring 1.1s var(--ease-out); }
 @keyframes ring { from { opacity: 1; transform: scale(0.6); } to { opacity: 0; transform: scale(1.6); } }
-.b-label { font: 600 14px var(--font-text); fill: var(--ink); pointer-events: none; }
+.b-label { font: 700 14px var(--font-text); fill: var(--ink); pointer-events: none; }
 .b-hit { fill: transparent; cursor: pointer; }
 @media (hover: hover) { .b-mark:hover .b-dot { fill: var(--vermilion); } }
 
@@ -90,19 +90,19 @@
 .play-keys { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0.9rem 0 0.4rem; }
 .key-btn {
   display: inline-flex; flex-direction: column; align-items: center; justify-content: center; min-width: 48px; min-height: 48px; padding: 0.25rem 0.55rem;
-  border: 1px solid var(--edge); border-radius: 4px; background: var(--card); color: var(--ink); font: 600 0.95rem/1.1 var(--font-text); cursor: pointer;
+  border: 1px solid var(--edge); border-radius: 3px; background: var(--card); color: var(--ink); font: 700 0.95rem/1.1 var(--font-text); cursor: pointer;
 }
 .key-btn small { font-size: 0.78rem; color: var(--vermilion-deep); font-weight: 700; }
 .key-btn:active { background: var(--ink); color: var(--cream); }
 @media (hover: hover) { .key-btn:hover { border-color: var(--ink); background: var(--card-hover); } }
-.rod-ctl { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.75rem; margin-left: auto; font-weight: 600; }
+.rod-ctl { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.75rem; margin-left: auto; font-weight: 700; }
 .rod-ctl input { accent-color: var(--jade); width: 11rem; min-height: 44px; }
 .rod-ctl output { min-width: 7.5rem; font-weight: 500; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 
 .how { display: grid; gap: 0.3rem; margin: 0.5rem 0 0; color: var(--ink-soft); max-width: 62rem; }
 .how p { margin: 0; }
 .how b { color: var(--ink); }
-.how kbd, .no-sound kbd { background: var(--card); color: var(--ink); border: 1px solid var(--edge); border-radius: 3px; padding: 0 0.35rem; font: 600 0.85rem var(--font-text); box-shadow: none; }
+.how kbd, .no-sound kbd { background: var(--card); color: var(--ink); border: 1px solid var(--edge); border-radius: 3px; padding: 0 0.35rem; font: 700 0.85rem var(--font-text); box-shadow: none; }
 .no-sound { margin: 0.6rem 0 0; font-size: 0.92rem; color: var(--ink-soft); }
 
 /* ---------- reading ---------- */
@@ -150,7 +150,7 @@
 .mic-btn { border-color: var(--ink); }
 .mic-btn[aria-pressed="true"] { background: var(--ink); color: var(--cream); }
 .blow-btn:active { background: var(--ink); color: var(--cream); }
-.breath { display: inline-flex; align-items: center; gap: 0.5rem; margin-left: auto; font-weight: 600; }
+.breath { display: inline-flex; align-items: center; gap: 0.5rem; margin-left: auto; font-weight: 700; }
 .breath-bar { display: inline-block; width: 7rem; height: 10px; border: 1px solid var(--edge); background: var(--card); }
 .breath-bar > span { display: block; height: 100%; width: 0; background: var(--vermilion); }
 .fl-note { min-width: 3.2rem; font: 800 1.3rem var(--font-display); }
@@ -167,10 +167,11 @@
 .mic-info { font-size: 0.85rem; color: var(--ink-soft); min-height: 1.2em; }
 
 /* sáo trúc: what each finger does must be visible without guessing */
-.fl-readout { display: flex; align-items: baseline; gap: 0.6rem; margin: 0 0 0.4rem; font-weight: 600; color: var(--ink-soft); }
+.fl-readout { display: flex; align-items: baseline; gap: 0.6rem; margin: 0 0 0.4rem; font-weight: 700; color: var(--ink-soft); }
 .fl-readout b { font: 800 clamp(2.4rem, 6vw, 3.4rem)/1 var(--font-display); color: var(--ink); min-width: 5.5rem; }
 .fl-state { font: 700 15px var(--font-text); fill: var(--ink-soft); pointer-events: none; }
 .fl-state.is-open { fill: var(--vermilion-deep); }
 .fl-pivot { fill: none; stroke: var(--vermilion); stroke-width: 3.5; opacity: 0; pointer-events: none; }
 .fl-pivot.is-on { opacity: 1; }
 .fl-hint { margin: 0.7rem 0 0; padding: 0.6rem 0.9rem; background: var(--card); border: 1px dashed var(--edge); color: var(--ink); font-weight: 500; max-width: 46rem; }
+.tr-west { font-weight: 500; fill: var(--ink-soft); }

@@ -43,6 +43,7 @@
     whyFilters2: { en: "Drop one filter to see more:", vi: "Bỏ bớt một bộ lọc để xem thêm:" },
     dropFilter: { en: "Remove “{f}” ({n})", vi: "Bỏ “{f}” ({n})" },
     clearSearch: { en: "Clear the search", vi: "Xóa ô tìm" },
+    clearAll: { en: "Clear all filters", vi: "Bỏ hết bộ lọc" },
     showAll: { en: "Show all instruments", vi: "Hiện tất cả nhạc cụ" },
     undo: { en: "Undo", vi: "Hoàn tác" },
     removedSaved: { en: "{name} removed from saved.", vi: "Đã bỏ lưu {name}." },
@@ -214,7 +215,11 @@
     document.getElementById("lib-count").textContent = anyFilter()
       ? fill(t(UI.showing), { n: list.length, t: total })
       : fill(t(UI.showingAll), { t: total });
-    document.getElementById("lib-reset").hidden = !anyFilter();
+    // one clear control, named for what it clears; the empty state offers its own buttons
+    var reset = document.getElementById("lib-reset");
+    var onlySearch = state.q && state.family === "all" && state.region === "all" && !state.playable && !state.saved;
+    reset.hidden = !anyFilter() || !list.length;
+    reset.textContent = t(onlySearch ? UI.clearSearch : UI.clearAll);
     document.getElementById("filter-apply").textContent = !list.length ? t(UI.showNone) : list.length === 1 ? t(UI.showOne) : fill(t(UI.showN), { n: list.length });
     document.getElementById("filter-apply").disabled = !list.length;
     var empty = document.getElementById("lib-empty");
